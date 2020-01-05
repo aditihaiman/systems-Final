@@ -13,9 +13,12 @@ int main(){
     fgets(input, 3, stdin);
     if (input[0] == 'y'){
         printf("Oh no, your town was destroyed and everyone died. You have to leave your town to defeat the enemies in the surrounding area. Would you like to go through [forest] or [desert]? ");
-        fgets(input, 3, stdin);
+        fgets(input, 7, stdin);
         if (strcmp(input,"forest")==0){
-            printf("A");
+            printf("A\n");
+        }
+        if (strcmp(input,"desert")==0){
+            printf("You’re not prepared, smarty pants. You’re out of water. You die of thirst.\n");
         }
     }
     if (input[0] == 'n'){
