@@ -17,12 +17,8 @@ int main(){
             fgets(input, 7, stdin);
             if (strcmp(input,"forest")==0){
                 printf("You meet a forest troll who refuses your passage unless you can answer his three riddles. Would you like to answer them or run away? [answer] or [run] ");
-                int ch = getchar();
-                while (ch != '\n' && ch != EOF);
+                fgetc(stdin);
                 fgets(input, 7, stdin);
-                //printf("errno: %d, error:\n", errno, strerror(errno));
-                //printf("%s\n", input);
-                printf("%s, %d\n", input, strcmp(input, "answer"));
                 if (strcmp(input,"answer")==0) {
                     printf("The first riddle: \n");
                 }
