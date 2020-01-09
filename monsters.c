@@ -1,11 +1,11 @@
 #include "players.h"
 
 struct monster* randomMonster(){
-    
+
 }
 
 void battleMonster(struct monster*, struct player*){
-    
+
 }
 
 
@@ -21,7 +21,7 @@ struct monster* createTroll(){
 }
 
 void battleTroll(){
-    
+
 }
 
 struct monster* createSkeleton(){
@@ -177,4 +177,60 @@ struct monster* createPalpatine(){
     palpatine->level = 3;
     palpatine->status = 1;
     return palpatine;
+}
+
+
+
+
+void battleMonster(struct monster*, struct player*){
+    if (strcmp(monster->type, "troll")==0)
+        battleTroll(struct monster*, struct player*);
+    if (strcmp(monster->type, "siren")==0)
+        battleSiren(struct monster*, struct player*);
+    else battle(struct monster*, struct player*);
+}
+
+void battleTroll(struct monster*, struct player*){
+  //You meet a forest troll who refuses your passage unless you can answer his three riddles. Would you like to answer them or run away? [answer] or [run]
+  printf("%s", moster->initialmessage);
+  fgetc(stdin);
+  fgets(input, 7, stdin);
+  if (strcmp(input,"answer")==0) {
+      int x = 1;
+      while (x <= 3){
+          if (player->health == 0) deafeated(struct monster*, stuct player*);
+          int damage = 0;
+          printf("Riddle #%d: [0]\n", x);
+          fgetc(stdin);
+          fgets(input, 3, stdin);
+          if (intput[0] == '0'){
+              printf("You answered correctly. The troll is impressed.\n")
+          }
+          else{
+              printf("You answered wrong. Your health is now %d.\n", player->health);
+              player->health = player->health - (monster->damage + damage);
+              damage += monster->damage;
+          }
+          x++;
+      }
+      printf("You have answered all of the riddles correctly! The troll will let you pass. You have gained %d points in experience!\n", monster->damage);
+      void victory(struct monster*, struct player*);
+      return 0;
+  }
+  if (strcmp(input,"run\n")==0) {
+      printf("You try to run but the troll catches up to you and eats you whole.\n");
+      return 0;
+  }
+
+}
+
+
+void deafeated(struct monster*, struct player*){
+    printf(monster->defeatmessage);
+    goto end;
+}
+
+void victory(struct monster*, struct player*){
+    player->experience += monster->damage;
+    printf(monster->victorymessage);
 }
