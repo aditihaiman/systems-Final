@@ -17,6 +17,7 @@ struct monster* createTroll(){
     troll->damage = 5;
     troll->level = 0;
     troll->status = 1;
+    troll->initialmessage = "You meet a forest troll who refuses your passage unless you can answer his three riddles. Would you like to answer them or run away? [answer] or [run]";
     return troll;
 }
 
@@ -191,8 +192,7 @@ void battleMonster(struct monster*, struct player*){
 }
 
 void battleTroll(struct monster*, struct player*){
-  //You meet a forest troll who refuses your passage unless you can answer his three riddles. Would you like to answer them or run away? [answer] or [run]
-  printf("%s", moster->initialmessage);
+  printf("%s", moster->initialmessage)";
   fgetc(stdin);
   fgets(input, 7, stdin);
   if (strcmp(input,"answer")==0) {
