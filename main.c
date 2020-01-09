@@ -1,10 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <sys/wait.h>
-#include <errno.h>
-#include <fcntl.h>
+#include "players.h"
 
 int main(){
     int x = 1;
@@ -29,6 +23,7 @@ int main(){
                     }
                     else{
                         printf("You answered wrong and must enter battle with the troll.\n");
+                        return 0;
                     }
                 }
                 if (strcmp(input,"run\n")==0) {
