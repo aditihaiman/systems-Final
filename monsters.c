@@ -1,40 +1,14 @@
 #include "players.h"
 
 struct monster* randomMonster(){
-
-}
-
-int battleMonster(struct monster* monster, struct player* player){ //returns 0 if player wins, 1 if player loses
-    if (strcmp(monster->type, "troll")==0) {
-        return battleTroll(monster, player);
-    }
-//    if (strcmp(monster->type, "siren")==0) {
-//        battleSiren(monster, player);
-//  }
-    else {
-        while (player->health > 0) {
-            
-        }
-    }
-    return 0;
-}
-
-
-//------------Level 0--------------//
-struct monster* createTroll(){
-    struct monster *troll = malloc(sizeof(struct monster));
-    troll->type = "troll";
-    troll->health = 30;
-    troll->damage = 5;
-    troll->level = 0;
-    troll->status = 1;
-    troll->initialmessage = "You meet a forest troll who refuses your passage unless you can answer his three riddles. Would you like to answer them or run away? [answer] or [run]";
-    return troll;
+    struct monster *MONSTER;
+    
+    return MONSTER;
 }
 
 int battleTroll(struct monster* monster, struct player* player){ //returns 0 if player wins, 1 if player loses
     char *input;
-    printf("%s", monster->initialmessage);
+    printf("%s ", monster->initialmessage);
     fgetc(stdin);
     fgets(input, 7, stdin);
     if (strcmp(input,"answer")==0) {
@@ -67,8 +41,37 @@ int battleTroll(struct monster* monster, struct player* player){ //returns 0 if 
         printf("You try to run but the troll catches up to you and eats you whole.\n");
         return 1;
     }
+    return 0;
 }
 
+int battleMonster(struct monster* monster, struct player* player){ //returns 0 if player wins, 1 if player loses
+    int output;
+    if (strcmp(monster->type, "troll")==0) {
+        output = battleTroll(monster, player);
+    }
+//    if (strcmp(monster->type, "siren")==0) {
+//        battleSiren(monster, player);
+//  }
+    else {
+        while (player->health > 0) {
+            
+        }
+    }
+    return output;
+}
+
+
+//------------Level 0--------------//
+struct monster* createTroll(){
+    struct monster *troll = malloc(sizeof(struct monster));
+    troll->type = "troll";
+    troll->health = 30;
+    troll->damage = 5;
+    troll->level = 0;
+    troll->status = 1;
+    troll->initialmessage = "You meet a forest troll who refuses your passage unless you can answer his three riddles. Would you like to answer them or run away? [answer] or [run]";
+    return troll;
+}
 
 struct monster* createSkeleton(){
     struct monster *skeleton = malloc(sizeof(struct monster));

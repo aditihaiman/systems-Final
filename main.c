@@ -8,6 +8,7 @@ struct player* createPlayer(char *name){
     player->health = 20;
     player->damage = 5;
     player->level = 0;
+    return player;
 }
 
 int main(){
@@ -18,13 +19,13 @@ int main(){
         fgets(input, 3, stdin);
         if (input[0] == 'y'){
             printf("Type in your character name: ");
-            fgets(input, 7, stdin);
+            fgets(input, 100, stdin);
+            strtok(input, "\n"); //removes newline
             struct player *PLAYER = createPlayer(input);
-            printf("Oh no, your town was destroyed and everyone died. You have to leave your town to defeat the enemies in the surrounding area. Would you like to go through [forest] or [desert]? ");
+            printf("Oh no, %s! your town was destroyed and everyone died. You have to leave your town to defeat the enemies in the surrounding area. Would you like to go through [forest] or [desert]? ", PLAYER->name);
             fgets(input, 7, stdin);
-
             if (strcmp(input,"forest")==0){
-                struct monster *MONSTER = randomMonster();
+                struct monster *MONSTER = createTroll();
                 battleMonster(MONSTER, PLAYER);
                 /*
                 //SEPARATE FUNCTION FOR

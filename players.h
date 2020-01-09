@@ -24,3 +24,6 @@ struct monster {
     char *defeatmessage; //message given when the player is defeated
     char *victorymessage;//message given when the player wins
 };
+
+struct monster* createTroll();
+int battleMonster(struct monster*, struct player*);
