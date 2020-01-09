@@ -4,8 +4,19 @@ struct monster* randomMonster(){
 
 }
 
-void battleMonster(struct monster*, struct player*){
-
+int battleMonster(struct monster* monster, struct player* player){ //returns 0 if player wins, 1 if player loses
+    if (strcmp(monster->type, "troll")==0) {
+        return battleTroll(monster, player);
+    }
+//    if (strcmp(monster->type, "siren")==0) {
+//        battleSiren(monster, player);
+//  }
+    else {
+        while (player->health > 0) {
+            
+        }
+    }
+    return 0;
 }
 
 
@@ -21,9 +32,43 @@ struct monster* createTroll(){
     return troll;
 }
 
-void battleTroll(){
-
+int battleTroll(struct monster* monster, struct player* player){ //returns 0 if player wins, 1 if player loses
+    char *input;
+    printf("%s", monster->initialmessage);
+    fgetc(stdin);
+    fgets(input, 7, stdin);
+    if (strcmp(input,"answer")==0) {
+        int x = 1;
+        while (x <= 3){
+            if (player->health <= 0) {
+                printf("%s\n", monster->defeatmessage);
+                return 1;
+            }
+            int damage = 0;
+            printf("Riddle #%d: [0]\n", x);
+            fgetc(stdin);
+            fgets(input, 3, stdin);
+            if (input[0] == '0'){
+                printf("You answered correctly. The troll is impressed.\n");
+            }
+            else{
+                printf("You answered wrong. Your health is now %d.\n", player->health);
+                player->health = player->health - (monster->damage + damage);
+                damage += monster->damage;
+            }
+            x++;
+        }
+        printf("You have answered all of the riddles correctly! The troll will let you pass. You have gained %d points in experience!\n", monster->damage);
+        player->experience += monster->damage;
+        printf("%s\n", monster->victorymessage);
+        return 0;
+    }
+    if (strcmp(input,"run\n")==0) {
+        printf("You try to run but the troll catches up to you and eats you whole.\n");
+        return 1;
+    }
 }
+
 
 struct monster* createSkeleton(){
     struct monster *skeleton = malloc(sizeof(struct monster));
@@ -181,56 +226,8 @@ struct monster* createPalpatine(){
 }
 
 
+//============================================//
 
-
-void battleMonster(struct monster*, struct player*){
-    if (strcmp(monster->type, "troll")==0)
-        battleTroll(struct monster*, struct player*);
-    if (strcmp(monster->type, "siren")==0)
-        battleSiren(struct monster*, struct player*);
-    else battle(struct monster*, struct player*);
+void defeated(struct monster* monster, struct player* player){
 }
 
-void battleTroll(struct monster*, struct player*){
-  printf("%s", moster->initialmessage)";
-  fgetc(stdin);
-  fgets(input, 7, stdin);
-  if (strcmp(input,"answer")==0) {
-      int x = 1;
-      while (x <= 3){
-          if (player->health == 0) deafeated(struct monster*, stuct player*);
-          int damage = 0;
-          printf("Riddle #%d: [0]\n", x);
-          fgetc(stdin);
-          fgets(input, 3, stdin);
-          if (intput[0] == '0'){
-              printf("You answered correctly. The troll is impressed.\n")
-          }
-          else{
-              printf("You answered wrong. Your health is now %d.\n", player->health);
-              player->health = player->health - (monster->damage + damage);
-              damage += monster->damage;
-          }
-          x++;
-      }
-      printf("You have answered all of the riddles correctly! The troll will let you pass. You have gained %d points in experience!\n", monster->damage);
-      void victory(struct monster*, struct player*);
-      return 0;
-  }
-  if (strcmp(input,"run\n")==0) {
-      printf("You try to run but the troll catches up to you and eats you whole.\n");
-      return 0;
-  }
-
-}
-
-
-void deafeated(struct monster*, struct player*){
-    printf(monster->defeatmessage);
-    goto end;
-}
-
-void victory(struct monster*, struct player*){
-    player->experience += monster->damage;
-    printf(monster->victorymessage);
-}

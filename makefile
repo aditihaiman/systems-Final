@@ -1,11 +1,18 @@
+ifeq ($(DEBUG), true)
+	CC = gcc -g
+else
+	CC = gcc
+endif
+
+
 all: main.o monsters.o
-	gcc -o program main.o
+	$(CC) -o program main.o monsters.o
 
 main.o: main.c players.h
-	gcc -c main.c
+	$(CC) -c main.c
 
 monsters.o: monsters.c players.h
-	gcc -c monsters.c
+	$(CC) -c monsters.c
 
 run: 
 	./program

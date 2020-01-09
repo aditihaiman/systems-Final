@@ -1,8 +1,10 @@
 #include "players.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 struct player* createPlayer(char *name){
-    struct player *name = malloc(sizeof(struct player));
-    //player->name;
+    struct player *player = malloc(sizeof(struct player));
+    player->name = name;
     player->health = 20;
     player->damage = 5;
     player->level = 0;
