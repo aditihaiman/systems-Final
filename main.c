@@ -20,9 +20,18 @@ int main(){
                 fgetc(stdin);
                 fgets(input, 7, stdin);
                 if (strcmp(input,"answer")==0) {
-                    printf("The first riddle: \n");
+                    printf("The first riddle: [0] "); //to advance [0]
+                    fgetc(stdin);
+                    fgets(input, 3, stdin);
+                    if (input[0]== '0'){
+                        printf("You answered correctly. The troll lets you pass.\n");
+                        sleep(10);
+                    }
+                    else{
+                        printf("You answered wrong and must enter battle with the troll.\n");
+                    }
                 }
-                if (strcmp(input,"run")==0) {
+                if (strcmp(input,"run\n")==0) {
                     printf("You try to run but the troll catches up to you and eats you whole.\n");
                     return 0;
                 }
