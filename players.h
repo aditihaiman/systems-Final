@@ -8,15 +8,19 @@
 
 struct player {
     char *name;
-    int health; 
+    int health;
     int damage; //how much damage you could potentially deal to an enemy
+    int experience;
     int level;
 };
 
 struct monster {
     char *type;
     int health;
-    int damage;
+    int damage; //damage dealt to player, also amount of experience gained when defeated
     int level;
     int status; //0 for defeated, 1 for undefeated
+    char *initialmessage; //message given when the monster is first encountered
+    char *defeatmessage; //message given when the player is defeated
+    char *victorymessage;//message given when the player wins
 };
