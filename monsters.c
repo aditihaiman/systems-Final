@@ -2,37 +2,37 @@
 
 struct monster* randomMonster(){
     struct monster *MONSTER;
-    
+
     return MONSTER;
 }
 
 int battleTroll(struct monster* monster, struct player* player){ //returns 0 if player wins, 1 if player loses
-    char *input;
+    char input[100];
     printf("%s ", monster->initialmessage);
     fgetc(stdin);
     fgets(input, 7, stdin);
     if (strcmp(input,"answer")==0) {
         int x = 1;
+        int damage = monster->damage;
         while (x <= 3){
-            if (player->health <= 0) {
-                printf("%s\n", monster->defeatmessage);
-                return 1;
-            }
-            int damage = 0;
             printf("Riddle #%d: [0]\n", x);
             fgetc(stdin);
             fgets(input, 3, stdin);
             if (input[0] == '0'){
-                printf("You answered correctly. The troll is impressed.\n");
+                printf("You answered correctly. The troll is impressed.\n\n");
             }
             else{
-                printf("You answered wrong. Your health is now %d.\n", player->health);
-                player->health = player->health - (monster->damage + damage);
+                player->health = player->health - damage;
                 damage += monster->damage;
+                printf("You answered wrong. Your health is now %d.\n", player->health);
             }
             x++;
+            if (player->health <= 0) {
+                printf("%s\n", monster->defeatmessage);
+                return 1;
+            }
         }
-        printf("You have answered all of the riddles correctly! The troll will let you pass. You have gained %d points in experience!\n", monster->damage);
+        printf("You have answered all of the riddles correctly! The troll will let you pass. You have gained %d points in experience!\n\n", monster->damage);
         player->experience += monster->damage;
         printf("%s\n", monster->victorymessage);
         return 0;
@@ -54,7 +54,7 @@ int battleMonster(struct monster* monster, struct player* player){ //returns 0 i
 //  }
     else {
         while (player->health > 0) {
-            
+
         }
     }
     return output;
@@ -233,4 +233,3 @@ struct monster* createPalpatine(){
 
 void defeated(struct monster* monster, struct player* player){
 }
-
