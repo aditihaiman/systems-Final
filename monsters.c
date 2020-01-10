@@ -1,9 +1,26 @@
 #include "players.h"
 
-struct monster* randomMonster(){
-    struct monster *MONSTER;
-
-    return MONSTER;
+struct monster* randomMonster(int level){
+    srand(time(NULL));
+    struct monster *MONSTERS[16];
+    MONSTERS[0] = createTroll();
+    MONSTERS[1] = createSkeleton();
+    MONSTERS[2] = createStormTrooper();
+    MONSTERS[3] = createSiren();
+    MONSTERS[4] = createChupacabra();
+    MONSTERS[5] = createWerewolf();
+    MONSTERS[6] = createSasquatch();
+    MONSTERS[7] = createDementor();
+    MONSTERS[8] = createCerberus();
+    MONSTERS[9] = createChimera();
+    MONSTERS[10] = createCyclops();
+    MONSTERS[11] = createGiant();
+    MONSTERS[12] = createMedusa();
+    MONSTERS[13] = createVoldemort();
+    MONSTERS[14] = createDarthVader();
+    MONSTERS[15] = createPalpatine();
+    int random = rand() % 4 + (level * 4);
+    return MONSTERS[random];
 }
 
 int battleTroll(struct monster* monster, struct player* player){ //returns 0 if player wins, 1 if player loses
@@ -46,6 +63,7 @@ int battleTroll(struct monster* monster, struct player* player){ //returns 0 if 
 
 int battleMonster(struct monster* monster, struct player* player){ //returns 0 if player wins, 1 if player loses
     int output;
+    printf("A\n");
     if (strcmp(monster->type, "troll")==0) {
         output = battleTroll(monster, player);
     }

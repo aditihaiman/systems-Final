@@ -12,8 +12,8 @@ struct player* createPlayer(char *name){
 }
 
 int main(){
-    int x = 1;
-    while(x){
+    int x = 0;
+    while(!x){
         char input[100];
         printf("Welcome to <game>!\nWould you like to begin? (y/n) ");
         fgets(input, 3, stdin);
@@ -25,8 +25,8 @@ int main(){
             printf("Oh no, %s! your town was destroyed and everyone died. You have to leave your town to defeat the enemies in the surrounding area. Would you like to go through [forest] or [desert]? ", PLAYER->name);
             fgets(input, 7, stdin);
             if (strcmp(input,"forest")==0){
-                struct monster *MONSTER = createTroll();
-                battleMonster(MONSTER, PLAYER);
+                struct monster *MONSTER = randomMonster(PLAYER->level);
+                x = battleMonster(MONSTER, PLAYER);
                 /*
                 //SEPARATE FUNCTION FOR
 

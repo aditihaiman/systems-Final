@@ -5,6 +5,7 @@
 #include <sys/wait.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <time.h>
 
 struct player {
     char *name;
@@ -26,4 +27,21 @@ struct monster {
 };
 
 struct monster* createTroll();
+struct monster* createSkeleton();
+struct monster* createStormTrooper();
+struct monster* createSiren();
+struct monster* createChupacabra();
+struct monster* createWerewolf();
+struct monster* createSasquatch();
+struct monster* createDementor();
+struct monster* createCerberus();
+struct monster* createChimera();
+struct monster* createCyclops();
+struct monster* createGiant();
+struct monster* createMedusa();
+struct monster* createVoldemort();
+struct monster* createDarthVader();
+struct monster* createPalpatine();
+
 int battleMonster(struct monster*, struct player*);
+struct monster* randomMonster(int level);
