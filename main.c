@@ -14,7 +14,7 @@ struct player* createPlayer(char *name){
 int main(){
     int x = 1;
     while(x){
-        char *input;
+        char input[100];
         printf("Welcome to <game>!\nWould you like to begin? (y/n) ");
         fgets(input, 3, stdin);
         if (input[0] == 'y'){
