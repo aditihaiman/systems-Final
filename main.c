@@ -20,6 +20,7 @@ void openInstructions(){
 
     //fix this so that it returns a string or something i don't know how it works
     char buff[10000];
+    memset(buff, 0, 10000);
     int rd = 0;
     rd = read(fd, buff, sizeof(buff));
     if (rd < 0){
@@ -62,6 +63,7 @@ int main(){
                     }
                     struct monster *MONSTER = randomMonster(PLAYER->level);
                     x = battleMonster(MONSTER, PLAYER);
+                    if (x==1) return 0;
                     /*
                      //SEPARATE FUNCTION FOR
                      */
