@@ -10,6 +10,7 @@
 struct player {
     char *name;
     int health;
+    int baseHealth;
     int damage; //how much damage you could potentially deal to an enemy
     int experience;
     int level;

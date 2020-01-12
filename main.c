@@ -7,6 +7,8 @@ struct player* createPlayer(char *name){
     player->name = name;
     player->health = 20;
     player->damage = 5;
+    player->baseHealth = 20;
+    player->experience = 0;
     player->level = 0;
     return player;
 }
@@ -61,3 +63,7 @@ int main(){
     }
     end: return 0;
 }
+
+//system("chmod 755 battle.sh");
+//int exit_status = system("open -a Terminal \"`pwd`\"");
+//system("./battle.sh");
