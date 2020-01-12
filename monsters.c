@@ -32,16 +32,17 @@ int battleTroll(struct monster* monster, struct player* player){ //returns 0 if 
         int x = 1;
         int damage = monster->damage;
         while (x <= 3){
-            printf("Riddle #%d: [0]\n", x);
-            fgetc(stdin);
+            printf("Riddle #%d: [0] ", x);
+            if (x==1) fgetc(stdin);
             fgets(input, 3, stdin);
+            printf("%s\n", input);
             if (input[0] == '0'){
                 printf("You answered correctly. The troll is impressed.\n\n");
             }
             else{
                 player->health = player->health - damage;
                 damage += monster->damage;
-                printf("You answered wrong. Your health is now %d.\n", player->health);
+                printf("You answered wrong. The troll did %d damage to you. Your health is now %d.\n", damage, player->health);
             }
             x++;
             if (player->health <= 0) {
@@ -62,6 +63,7 @@ int battleTroll(struct monster* monster, struct player* player){ //returns 0 if 
 }
 
 int battleMonster(struct monster* monster, struct player* player){ //returns 0 if player wins, 1 if player loses
+    char input[100];
     int output;
     printf("A\n");
     if (strcmp(monster->type, "troll")==0) {
@@ -71,8 +73,26 @@ int battleMonster(struct monster* monster, struct player* player){ //returns 0 i
 //        battleSiren(monster, player);
 //  }
     else {
+        printf("Oh no! You have encountered a %s.\n", monster->type);
+        int turn = 0; //0 means it is players turn
         while (player->health > 0) {
-
+            if (monster->health <= 0){
+                printf("Congratulations! You have defeated the %s. You have gained %d points in experience!\n", monster->type, monster->damage);
+            }
+            else {
+                if (turn == 0){
+                    printf("Press \"r\" to roll a dice to determine how much damage you do to the %s. You are capable of doing %d damage.\n", monster->type, player->damage);
+                    fgets(input, 3, stdin);
+                    if (input[0]=='r'){
+                        
+                    }
+                }
+                if (turn == 1) {
+                    
+                }
+            }
+            if (turn == 0) turn = 1;
+            else turn = 0;
         }
     }
     return output;
