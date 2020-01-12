@@ -53,12 +53,19 @@ int main(){
             printf("Oh no, %s! your town was destroyed and everyone died. You have to leave your town to defeat the enemies in the surrounding area. Would you like to go through [forest] or [desert]? ", PLAYER->name);
             fgets(input, 7, stdin);
             if (strcmp(input,"forest")==0){
-                struct monster *MONSTER = randomMonster(PLAYER->level);
-                x = battleMonster(MONSTER, PLAYER);
-                /*
-                //SEPARATE FUNCTION FOR
-
-                */
+                for(int x = 0; x < 4; x++){
+                    if(player->experience >= 50){
+                        player->level += 1;
+                        player->health += 10;
+                        player->damage += 10;
+                        printf("Congratulations %s! You have leveled up to level %d. Your base health is now %d and you are now capable of doing %d damage.\n", player->name, player->level, player->health, player->damage);
+                    }
+                    struct monster *MONSTER = randomMonster(PLAYER->level);
+                    x = battleMonster(MONSTER, PLAYER);
+                    /*
+                     //SEPARATE FUNCTION FOR
+                     */
+                }
             }
             if (strcmp(input,"desert")==0){
                 printf("You’re not prepared, smarty pants. You’re out of water. You die of thirst.\n");
