@@ -42,6 +42,8 @@ struct monster* createMedusa();
 struct monster* createVoldemort();
 struct monster* createDarthVader();
 struct monster* createPalpatine();
+void forest(struct player PLAYER);
+void desert(struct player PLAYER);
 
 int battleMonster(struct monster*, struct player*);
 struct monster* randomMonster(int level);
