@@ -1,0 +1,23 @@
+January 
+
+
+January 9, 2020
+
+Sowjanya
+
+- Wrote initial code for battleMonsters() and battleTroll().
+
+January 10, 2020
+
+Sowjanya
+
+- Worked on fixing bugs and including more features in battleTroll()
+
+
+January 12, 2020
+
+Sowjanya
+
+- Wrote a preliminary text file with instructions on how to play the game.
+- Wrote function openInstructions(), which allows user to open a text file with the game instructions before they start the game.
+- Wrote code for forest.c and desert.c, which included the functions that prompts user to move forward in the game in their specified setting.
