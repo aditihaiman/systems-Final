@@ -6,7 +6,7 @@ endif
 
 
 all: main.o monsters.o forest.o desert.o
-	$(CC) -o program main.o monsters.o
+	$(CC) -o program main.o monsters.o forest.o desert.o
 
 main.o: main.c players.h
 	$(CC) -c main.c
