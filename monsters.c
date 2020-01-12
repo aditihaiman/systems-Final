@@ -77,7 +77,7 @@ int battleMonster(struct monster* monster, struct player* player){ //returns 0 i
         int turn = 0; //0 means it is players turn
         while (player->health > 0 && monster->health > 0) {
             if (turn == 0){
-                printf("Press \"r\" to roll a dice to determine how much damage you do to the %s. You are capable of doing %d damage. ", monster->type, player->damage);
+                printf("Press \"r\" to roll a dice to determine how much damage you do to the %s. You are capable of doing up to %d damage. ", monster->type, player->damage);
                 if (output==0) fgetc(stdin); output = 1;
                 fgets(input, 3, stdin);
                 if (input[0]=='r'){
@@ -97,7 +97,20 @@ int battleMonster(struct monster* monster, struct player* player){ //returns 0 i
             else turn = 0;
         }
         if (monster->health <= 0){
-            printf("Congratulations! You have defeated the %s. You have gained %d points in experience!\n", monster->type, monster->damage);
+            printf("Congratulations! You have defeated the %s. You have gained %d points in experience!\n\n", monster->type, monster->damage);
+            player->experience += monster->damage;
+            int XP_to_health = player->baseHealth - player->health;
+            if (XP_to_health > player->experience) XP_to_health = player->experience;
+            printf("Your health is at %d, but it could be at %d. Would you like to expend some of the experience you earned to regain some health? Enter a number from 0 to %d: ", player->health, player->baseHealth, XP_to_health);
+            fgets(input, 3, stdin);
+            while(atoi(input) > XP_to_health || input[0]=='-'){
+                printf("Please enter a number between 0 and %d: ", XP_to_health);
+                fgetc(stdin);
+                fgets(input, 3, stdin);
+            }
+            player->experience -= atoi(input);
+            player->health += atoi(input);
+            printf("Your health is now at %d.\n\n", player->health);
             output = 0;
         }
         if (player->health <= 0){
@@ -124,8 +137,8 @@ struct monster* createTroll(){
 struct monster* createSkeleton(){
     struct monster *skeleton = malloc(sizeof(struct monster));
     skeleton->type = "skeleton";
-    skeleton->health = 20;
-    skeleton->damage = 10;
+    skeleton->health = 10;
+    skeleton->damage = 7;
     skeleton->level = 0;
     skeleton->status = 1;
     return skeleton;
