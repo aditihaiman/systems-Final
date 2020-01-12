@@ -54,11 +54,11 @@ int main(){
             fgets(input, 7, stdin);
             if (strcmp(input,"forest")==0){
                 for(int x = 0; x < 4; x++){
-                    if(player->experience >= 50){
-                        player->level += 1;
-                        player->health += 10;
-                        player->damage += 10;
-                        printf("Congratulations %s! You have leveled up to level %d. Your base health is now %d and you are now capable of doing %d damage.\n", player->name, player->level, player->health, player->damage);
+                    if(PLAYER->experience >= 50){
+                        PLAYER->level += 1;
+                        PLAYER->health += 10;
+                        PLAYER->damage += 10;
+                        printf("Congratulations %s! You have leveled up to level %d. Your base health is now %d and you are now capable of doing %d damage.\n", PLAYER->name, PLAYER->level, PLAYER->health, PLAYER->damage);
                     }
                     struct monster *MONSTER = randomMonster(PLAYER->level);
                     x = battleMonster(MONSTER, PLAYER);
