@@ -11,11 +11,39 @@ struct player* createPlayer(char *name){
     return player;
 }
 
+void openInstructions(){
+    int fd = open("instructions", O_RDONLY);
+    if (fd < 0){
+        printf("errno: %d error %s\n", errno, strerror(errno));
+        printf("fd: %d\n", fd);
+    }
+
+    //fix this so that it returns a string or something i don't know how it works
+    char buff[10000];
+    int rd = 0;
+    rd = read(fd, buff, sizeof(buff));
+    if (rd < 0){
+        printf("errno: %d error %s\n", errno, strerror(errno));
+        printf("rd: %d\n", rd);
+    }
+    printf("%s\n", buff);
+    close(rd);
+    close(fd);
+    //return buff;
+
+}
+
+
 int main(){
     int x = 0;
     while(!x){
         char input[100];
-        printf("Welcome to <game>!\nWould you like to begin? (y/n) ");
+        printf("Welcome to <game>!\nWould you like to view the instructions? (y/n): ");
+        fgets(input, 3, stdin);
+        if (input[0] == 'y'){
+            openInstructions();
+        }
+        printf("Would you like to begin? (y/n): ");
         fgets(input, 3, stdin);
         if (input[0] == 'y'){
             printf("Type in your character name: ");
