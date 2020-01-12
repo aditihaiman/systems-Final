@@ -5,7 +5,7 @@ else
 endif
 
 
-all: main.o monsters.o
+all: main.o monsters.o forest.o desert.o
 	$(CC) -o program main.o monsters.o
 
 main.o: main.c players.h
@@ -13,6 +13,12 @@ main.o: main.c players.h
 
 monsters.o: monsters.c players.h
 	$(CC) -c monsters.c
+
+forest.o: forest.c players.h
+	$(CC) -c forest.c
+
+desert.o: desert.c players.h
+	$(CC) -c desert.c
 
 run: 
 	./program
