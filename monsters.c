@@ -65,7 +65,7 @@ int battleTroll(struct monster* monster, struct player* player){ //returns 0 if 
 int battleMonster(struct monster* monster, struct player* player){ //returns 0 if player wins, 1 if player loses
     char input[100];
     int output;
-    printf("A\n");
+    //printf("A\n");
     if (strcmp(monster->type, "troll")==0) {
         output = battleTroll(monster, player);
     }
@@ -75,24 +75,34 @@ int battleMonster(struct monster* monster, struct player* player){ //returns 0 i
     else {
         printf("Oh no! You have encountered a %s.\n", monster->type);
         int turn = 0; //0 means it is players turn
-        while (player->health > 0) {
-            if (monster->health <= 0){
-                printf("Congratulations! You have defeated the %s. You have gained %d points in experience!\n", monster->type, monster->damage);
+        while (player->health > 0 || monster->health > 0) {
+            if (turn == 0){
+                printf("Press \"r\" to roll a dice to determine how much damage you do to the %s. You are capable of doing %d damage. ", monster->type, player->damage);
+                fgetc(stdin);
+                fgets(input, 3, stdin);
+                if (input[0]=='r'){
+                    srand(time(NULL));
+                    int damage = rand() % player->damage;
+                    monster->health -= damage;
+                    printf("You have done %d damage. The %s is now at %d health.\n", damage, monster->type, monster->health);
+                }
             }
-            else {
-                if (turn == 0){
-                    printf("Press \"r\" to roll a dice to determine how much damage you do to the %s. You are capable of doing %d damage.\n", monster->type, player->damage);
-                    fgets(input, 3, stdin);
-                    if (input[0]=='r'){
-                        
-                    }
-                }
-                if (turn == 1) {
-                    
-                }
+            if (turn == 1) {
+                srand(time(NULL));
+                int damage = rand() % monster->damage;
+                player->health -= damage;
+                printf("The %s has dealt %d damage to you. You are now at %d health.\n", monster->type, damage, player->health);
             }
             if (turn == 0) turn = 1;
             else turn = 0;
+        }
+        if (monster->health <= 0){
+            printf("Congratulations! You have defeated the %s. You have gained %d points in experience!\n", monster->type, monster->damage);
+            output = 0;
+        }
+        if (player->health <= 0){
+            printf("You have been defeated by the %s. Better luck next time.\n", monster->type);
+            output = 1;
         }
     }
     return output;
