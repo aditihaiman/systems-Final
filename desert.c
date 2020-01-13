@@ -8,6 +8,7 @@ int desert(struct player *PLAYER){
     char input[100];
     char previnput[100];
     forest: printf("You've just entered the desert. There is a plateau ahead, a canyon to your right, and a cave to your left. Where would you like to go? [plateau/ canyon/ cave]: ");
+    fgetc(stdin);
     fgets(input, 10, stdin);
     if (strcmp(input,"plateau")==0) goto plateau;
     if (strcmp(input,"canyon")==0) goto canyon;

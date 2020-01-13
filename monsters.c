@@ -26,7 +26,7 @@ struct monster* randomMonster(int level){
 int battleTroll(struct monster* monster, struct player* player){ //returns 0 if player wins, 1 if player loses
     char input[100];
     printf("%s ", monster->initialmessage);
-    fgetc(stdin);
+    //fgetc(stdin);
     fgets(input, 7, stdin);
     if (strcmp(input,"answer")==0) {
         int x = 1;
@@ -78,7 +78,7 @@ int battleMonster(struct monster* monster, struct player* player){ //returns 0 i
         while (player->health > 0 && monster->health > 0) {
             if (turn == 0){
                 printf("Press \"r\" to roll a dice to determine how much damage you do to the %s. You are capable of doing up to %d damage. ", monster->type, player->damage);
-                if (output==0) fgetc(stdin); output = 1;
+                if (output!=0) fgetc(stdin);
                 fgets(input, 3, stdin);
                 if (input[0]=='r'){
                     srand(time(NULL));
