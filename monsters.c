@@ -25,19 +25,19 @@ struct monster* randomMonster(int level){
 
 int battleTroll(struct monster* monster, struct player* player){ //returns 0 if player wins, 1 if player loses
     char input[100];
-    printf("%s ", monster->initialmessage);
+    printf("\n%s ", monster->initialmessage);
     //fgetc(stdin);
     fgets(input, 7, stdin);
     if (strcmp(input,"answer")==0) {
         int x = 1;
         int damage = monster->damage;
         while (x <= 3){
-            printf("Riddle #%d: [0] ", x);
+            printf("\nRiddle #%d: [0] ", x);
             if (x==1) fgetc(stdin);
             fgets(input, 3, stdin);
             printf("%s\n", input);
             if (input[0] == '0'){
-                printf("You answered correctly. The troll is impressed.\n\n");
+                printf("You answered correctly. The troll is impressed.\n");
             }
             else{
                 player->health = player->health - damage;
