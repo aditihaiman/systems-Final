@@ -1,5 +1,7 @@
 #!/bin/bash
 
-open -a "Terminal" `pwd`
+#open -a "Terminal" `pwd`
 make
-make run
+#make run
+
+gnome-terminal -e ./program
