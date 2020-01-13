@@ -4,7 +4,7 @@
 int forest(struct player *PLAYER){
     srand(time(NULL));
     int random;
-    int x;
+    int x = 0;
     char input[100];
     char previnput[100];
     forest: printf("You've just entered the forest. There is a clearing ahead, a a muddy path to your right, and a cave to your left. Where would you like to go? [clearing/ cave/ path]: ");
@@ -98,7 +98,7 @@ int forest(struct player *PLAYER){
           x = battleMonster(MONSTER, PLAYER);
           if (x==1) return 1;
         }
-    return 0;
+    return x;
 /*
     levelUp:
         for(int x = 0; x < 4; x++){

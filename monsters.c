@@ -111,11 +111,11 @@ int battleMonster(struct monster* monster, struct player* player){ //returns 0 i
             player->experience -= atoi(input);
             player->health += atoi(input);
             printf("Your health is now at %d.\n\n", player->health);
-            output = 0;
+            return 0;
         }
         if (player->health <= 0){
             printf("You have been defeated by the %s. Better luck next time.\n", monster->type);
-            output = 1;
+            return 1;
         }
     }
     return output;
