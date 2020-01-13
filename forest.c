@@ -7,7 +7,7 @@ int forest(struct player *PLAYER){
     int x = 0;
     char input[100];
     char previnput[100];
-    forest: printf("\nYou've just entered the forest. There is a clearing ahead, a a muddy path to your right, and a cave to your left. Where would you like to go? [clearing/ cave/ path]: ");
+    printf("\nYou've just entered the forest. There is a clearing ahead, a a muddy path to your right, and a cave to your left. Where would you like to go? [clearing/ cave/ path]: ");
     fgetc(stdin);
     fgets(input, 10, stdin);
     if (strcmp(input,"clearing")==0) goto clearing;

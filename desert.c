@@ -7,7 +7,7 @@ int desert(struct player *PLAYER){
     int x;
     char input[100];
     char previnput[100];
-    forest: printf("\nYou've just entered the desert. There is a plateau ahead, a canyon to your right, and a cave to your left. Where would you like to go? [plateau/ canyon/ cave]: ");
+    printf("\nYou've just entered the desert. There is a plateau ahead, a canyon to your right, and a cave to your left. Where would you like to go? [plateau/ canyon/ cave]: ");
     fgetc(stdin);
     fgets(input, 10, stdin);
     if (strcmp(input,"plateau")==0) goto plateau;
@@ -99,7 +99,7 @@ int desert(struct player *PLAYER){
           if (x==1) return 1;
 
         }
-    return 0;
+    return x;
 /*
     levelUp:
         for(int x = 0; x < 4; x++){
