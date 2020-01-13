@@ -73,7 +73,7 @@ int battleMonster(struct monster* monster, struct player* player){ //returns 0 i
 //        battleSiren(monster, player);
 //  }
     else {
-        printf("Oh no! You have encountered a %s.\n", monster->type);
+        printf("\nOh no! You have encountered a %s.\n", monster->type);
         int turn = 0; //0 means it is players turn
         while (player->health > 0 && monster->health > 0) {
             if (turn == 0){

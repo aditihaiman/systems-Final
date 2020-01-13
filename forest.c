@@ -7,7 +7,7 @@ int forest(struct player *PLAYER){
     int x = 0;
     char input[100];
     char previnput[100];
-    forest: printf("You've just entered the forest. There is a clearing ahead, a a muddy path to your right, and a cave to your left. Where would you like to go? [clearing/ cave/ path]: ");
+    forest: printf("\nYou've just entered the forest. There is a clearing ahead, a a muddy path to your right, and a cave to your left. Where would you like to go? [clearing/ cave/ path]: ");
     fgetc(stdin);
     fgets(input, 10, stdin);
     if (strcmp(input,"clearing")==0) goto clearing;
@@ -18,14 +18,14 @@ int forest(struct player *PLAYER){
         random = rand() % 3;
         //forking paths
         if (random == 0){
-            printf("The clearing leads to a cave and muddy path. Where would you like to go [cave/ path]: ");
+            printf("\nThe clearing leads to a cave and muddy path. Where would you like to go [cave/ path]: ");
             fgets(input, 10, stdin);
             if (strcmp(input,"cave")==0) goto cave;
             if (strcmp(input,"path")==0) goto path;
         }
         //dead end
         if (random == 1){
-            printf("You have reached a dead end. You may move to the right to left. [r/ l]: ");
+            printf("\nYou have reached a dead end. You may move to the right to left. [r/ l]: ");
             fgets(input, 10, stdin);
             goto clearing;
         }
@@ -39,14 +39,14 @@ int forest(struct player *PLAYER){
         random = rand() % 3;
         //forking paths
         if (random == 0){
-            printf("The cave leads to a muddy path and a lake. Where would you like to go? [path/ lake]: ");
+            printf("\nThe cave leads to a muddy path and a lake. Where would you like to go? [path/ lake]: ");
             fgets(input, 10, stdin);
             if (strcmp(input,"lake")==0) goto lake;
             if (strcmp(input,"path")==0) goto path;
         }
         //dead end
         if (random == 1){
-            printf("You have reached a dead end. You may move to the right or left. [r/ l]: ");
+            printf("\nYou have reached a dead end. You may move to the right or left. [r/ l]: ");
             fgets(input, 10, stdin);
             goto cave;
         }
@@ -60,14 +60,14 @@ int forest(struct player *PLAYER){
         random = rand() % 3;
         //forking paths
         if (random == 0){
-            printf("The path leads to a lake and a clearing. Where would you like to go? [lake/ clearing]: ");
+            printf("\nThe path leads to a lake and a clearing. Where would you like to go? [lake/ clearing]: ");
             fgets(input, 10, stdin);
             if (strcmp(input,"lake")==0) goto lake;
             if (strcmp(input,"clearing")==0) goto clearing;
         }
         //dead end
         if (random == 1){
-            printf("You have reached a dead end. You may move to the right or left. [r/ l]: ");
+            printf("\nYou have reached a dead end. You may move to the right or left. [r/ l]: ");
             fgets(input, 10, stdin);
             goto path;
         }
@@ -81,14 +81,14 @@ int forest(struct player *PLAYER){
         random = rand() % 3;
         //forking paths
         if (random == 0){
-            printf("The lake leads to a clearing and another cave. Where would you like to go? [clearing/ cave]: ");
+            printf("\nThe lake leads to a clearing and another cave. Where would you like to go? [clearing/ cave]: ");
             fgets(input, 10, stdin);
             if (strcmp(input,"clearing")==0) goto clearing;
             if (strcmp(input,"cave")==0) goto cave;
         }
         //dead end
         if (random == 1){
-            printf("You have reached a dead end. You may move to the right or left. [r/ l]: ");
+            printf("\nYou have reached a dead end. You may move to the right or left. [r/ l]: ");
             fgets(input, 10, stdin);
             goto path;
         }
