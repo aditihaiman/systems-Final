@@ -98,7 +98,7 @@ int battleMonster(struct monster* monster, struct player* player){ //returns 0 i
         }
         if (monster->health <= 0){
             printf("Congratulations! You have defeated the %s. You have gained %d points in experience!\n\n", monster->type, monster->damage);
-            player->experience += monster->damage;
+            player->experience += monster->damage * 2;
             int XP_to_health = player->baseHealth - player->health;
             if (XP_to_health > player->experience) XP_to_health = player->experience;
             printf("Your health is at %d, but it could be at %d. Would you like to expend some of the experience you earned to regain some health? Enter a number from 0 to %d: ", player->health, player->baseHealth, XP_to_health);
@@ -110,7 +110,7 @@ int battleMonster(struct monster* monster, struct player* player){ //returns 0 i
             }
             player->experience -= atoi(input);
             player->health += atoi(input);
-            printf("Your health is now at %d.\n\n", player->health);
+            printf("Your health is now at %d and your experience is at %d.\n\n", player->health, player->experience);
             return 0;
         }
         if (player->health <= 0){
@@ -148,7 +148,7 @@ struct monster* createSiren(){
     struct monster *siren = malloc(sizeof(struct monster));
     siren->type = "siren";
     siren->health = 5;
-    siren->damage = 15;
+    siren->damage = 10;
     siren->level = 0;
     siren->status = 1;
     return siren;
@@ -158,7 +158,7 @@ struct monster* createStormTrooper(){
     struct monster *stormtrooper = malloc(sizeof(struct monster));
     stormtrooper->type = "stormtrooper";
     stormtrooper->health = 5;
-    stormtrooper->damage = 10;
+    stormtrooper->damage = 5;
     stormtrooper->level = 0;
     stormtrooper->status = 1;
     return stormtrooper;
