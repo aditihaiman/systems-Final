@@ -1,6 +1,34 @@
 #include "players.h"
 
-
+int pipeForBattle(struct monster* monster, struct player* player){
+    int fd;
+    
+    char * myfifo = "/tmp/myfifo";
+   
+    mkfifo(myfifo, 0666);
+    
+    char monsterType[100], playerName[100], pBHealth[1], pHealth[1], pDamage[1], pExp[1], pLev[1];
+    strcpy(monsterType, monster->type);
+    strcpy(playerName, player->name);
+    sprintf(pBHealth, "%d", player->baseHealth);
+    sprintf(pHealth, "%d", player->health);
+    sprintf(pDamage, "%d", player->damage);
+    sprintf(pExp, "%d", player->experience);
+    sprintf(pLev, "%d", player->level);
+    
+    fd = open(myfifo, O_WRONLY);
+    write(fd, monsterType, sizeof(monsterType));
+    write(fd, playerName, sizeof(playerName));
+    write(fd, pBHealth, sizeof(pBHealth));
+    write(fd, pHealth, sizeof(pHealth));
+    write(fd, pDamage, sizeof(pDamage));
+    write(fd, pExp, sizeof(pExp));
+    write(fd, pLev, sizeof(pLev));
+    
+    close(fd);
+    unlink(myfifo);
+    return 0;
+}
 int forest(struct player *PLAYER){
     srand(time(NULL));
     int random;

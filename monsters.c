@@ -69,7 +69,7 @@ int battleTroll(struct monster* monster, struct player* player){ //returns 0 if 
         }
         printf("You have answered all of the riddles correctly! The troll will let you pass. You have gained %d points in experience!\n\n", monster->damage);
         player->experience += monster->damage;
-        if (player->experience >= ((player->level+1)*10)) levelUp(player);
+        if (player->experience >= ((player->level+1)*10)+10) levelUp(player);
         //printf("%s\n", monster->victorymessage);
         return 0;
     }
@@ -91,6 +91,7 @@ int battleMonster(struct monster* monster, struct player* player){ //returns 0 i
 //        battleSiren(monster, player);
 //  }
     else {
+        srand(time(NULL));
         printf("\nOh no! You have encountered a %s.\n", monster->type);
         int turn = 0; //0 means it is players turn
         while (player->health > 0 && monster->health > 0) {
@@ -99,14 +100,12 @@ int battleMonster(struct monster* monster, struct player* player){ //returns 0 i
                 if (output!=0) fgetc(stdin);
                 fgets(input, 3, stdin);
                 if (input[0]=='r'){
-                    srand(time(NULL));
                     int damage = rand() % player->damage;
                     monster->health -= damage;
                     printf("You have done %d damage. The %s is now at %d health.\n\n", damage, monster->type, monster->health);
                 }
             }
             if (turn == 1) {
-                srand(time(NULL));
                 int damage = rand() % monster->damage;
                 player->health -= damage;
                 printf("The %s has dealt %d damage to you. You are now at %d health.\n\n", monster->type, damage, player->health);
@@ -115,9 +114,9 @@ int battleMonster(struct monster* monster, struct player* player){ //returns 0 i
             else turn = 0;
         }
         if (monster->health <= 0){
-            printf("Congratulations! You have defeated the %s. You have gained %d points in experience!\n\n", monster->type, monster->damage);
+            printf("Congratulations! You have defeated the %s. You have gained %d points in experience!\n\n", monster->type, monster->damage*2);
             player->experience += monster->damage * 2;
-            if (player->experience >= ((player->level+1)*10)) levelUp(player);
+            if (player->experience >= ((player->level+1)*10)+10) levelUp(player);
             else{
                 int XP_to_health = player->baseHealth - player->health;
                 if (XP_to_health > player->experience) XP_to_health = player->experience;
@@ -303,7 +302,7 @@ struct monster* createDarthVader(){
 struct monster* createPalpatine(){
     struct monster *palpatine = malloc(sizeof(struct monster));
     palpatine->type = "palpatine";
-    palpatine->health = 75;
+    palpatine->health = 65;
     palpatine->damage = 40;
     palpatine->level = 3;
     palpatine->status = 1;
