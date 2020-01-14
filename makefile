@@ -5,8 +5,8 @@ else
 endif
 
 
-all: main.o monsters.o forest.o desert.o
-	$(CC) -o program main.o monsters.o forest.o desert.o
+all: main.o monsters.o forest.o desert.o village.o
+	$(CC) -o program main.o monsters.o forest.o desert.o village.o
 
 main.o: main.c players.h
 	$(CC) -c main.c
@@ -19,6 +19,9 @@ forest.o: forest.c players.h
 
 desert.o: desert.c players.h
 	$(CC) -c desert.c
+
+village.o: village.c players.h
+	$(CC) -c village.c
 
 run: 
 	./program

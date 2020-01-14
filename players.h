@@ -45,6 +45,7 @@ struct monster* createDarthVader();
 struct monster* createPalpatine();
 int forest(struct player *PLAYER);
 int desert(struct player *PLAYER);
+int village(struct player *player);
 
 int battleMonster(struct monster*, struct player*);
 struct monster* randomMonster(int level);

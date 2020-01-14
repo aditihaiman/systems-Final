@@ -15,6 +15,7 @@ struct monster* randomMonster(int level){
     MONSTERS[9] = createChimera();
     MONSTERS[10] = createCyclops();
     MONSTERS[11] = createGiant();
+    //Level 3
     MONSTERS[12] = createMedusa();
     MONSTERS[13] = createVoldemort();
     MONSTERS[14] = createDarthVader();
@@ -33,8 +34,8 @@ void levelUp(struct player* PLAYER){
       printf("Congratulations %s! You have leveled up to level %d. Your base health is now %d and you are now capable of doing %d damage.\n", PLAYER->name, PLAYER->level, PLAYER->health, PLAYER->damage);
   }
   if (PLAYER->level == 3){
-      printf("You have reached the last level of the game. You are now ready to go back to your village to deafeat the last few monsters. Whenever you're ready, type [go] to start level four and fulfill your purpose. [go]: ");
-      //village();
+      printf("You have reached the last level of the game. You are now ready to go back to your village to deafeat the last few monsters. You are transported back to the village to fulfill your destiny.\n");
+      village(PLAYER);
   }
 
 }
