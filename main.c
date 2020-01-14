@@ -52,11 +52,17 @@ int main(){
         printf("Type in your character name: ");
         fgets(input, 100, stdin);
         strtok(input, "\n"); //removes newline
-        struct player *PLAYER = createPlayer(input);
+        char name[100];
+        strcpy(name, input);
+        struct player *PLAYER = createPlayer(name);
         printf("Oh no, %s! your town was destroyed and everyone died. You have to leave your town to defeat the enemies in the surrounding area. Would you like to go through [forest] or [desert]? ", PLAYER->name);
-        fgets(input, 7, stdin);
-        if (strcmp(input,"forest")==0) forest(PLAYER);
-        if (strcmp(input,"desert")==0) desert(PLAYER);
+        fgets(input, 10, stdin);
+        while(strcmp(input,"forest\n")!=0 && strcmp(input,"desert\n")!=0){
+            printf("Invalid choice. Valid choices: [forest/ desert]\n\t");
+            fgets(input, 10, stdin);
+        }
+        if (strcmp(input,"forest\n")==0) forest(PLAYER);
+        if (strcmp(input,"desert\n")==0) desert(PLAYER);
     }
     if (input[0] == 'n'){
         return 0;
