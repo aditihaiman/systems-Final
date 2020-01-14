@@ -92,23 +92,23 @@ int battleMonster(struct monster* monster, struct player* player){ //returns 0 i
 //  }
     else {
         srand(time(NULL));
-        printf("\nOh no! You have encountered a %s.\n", monster->type);
+        printf("\nOh no! You have encountered a %s. The %s has %d health and is capable of doing %d damage. You must defeat the %s before you can move on!\n", monster->type, monster->type, monster->health, monster->damage, monster->type);
         int turn = 0; //0 means it is players turn
         while (player->health > 0 && monster->health > 0) {
             if (turn == 0){
-                printf("Press \"r\" to roll a dice to determine how much damage you do to the %s. You are capable of doing up to %d damage. ", monster->type, player->damage);
+                printf("\nPress \"r\" to roll a dice to determine how much damage you do to the %s. You are capable of doing up to %d damage. ", monster->type, player->damage);
                 if (output!=0) fgetc(stdin);
                 fgets(input, 3, stdin);
                 if (input[0]=='r'){
                     int damage = rand() % player->damage;
                     monster->health -= damage;
-                    printf("You have done %d damage. The %s is now at %d health.\n\n", damage, monster->type, monster->health);
+                    printf("\nYou have done %d damage. The %s is now at %d health.\n", damage, monster->type, monster->health);
                 }
             }
             if (turn == 1) {
                 int damage = rand() % monster->damage;
                 player->health -= damage;
-                printf("The %s has dealt %d damage to you. You are now at %d health.\n\n", monster->type, damage, player->health);
+                printf("\nThe %s has dealt %d damage to you. You are now at %d health.\n", monster->type, damage, player->health);
             }
             if (turn == 0) turn = 1;
             else turn = 0;
