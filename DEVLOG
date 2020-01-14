@@ -1,23 +1,52 @@
 January 
 
+January 5-6, 2020
+
+	Aditi
+		- starting working on the initial question/answer layout of the game
+		- started working on basic storyline
+
+January 8, 2020
+
+	Aditi
+		- fixed an issue with fgets where it didn't wait for user input
 
 January 9, 2020
 
-Sowjanya
+	Sowjanya
+		- Wrote initial code for battleMonsters() and battleTroll().
+	Aditi
+		- created monsters.c file and players.h header file with code to create every type of monster that is in the game with all the correct statistics
 
-- Wrote initial code for battleMonsters() and battleTroll().
 
 January 10, 2020
 
-Sowjanya
+	Sowjanya
+		- Worked on fixing bugs and including more features in battleTroll()
+	Aditi
+		- created function to generate a random monster for the player to encounter
 
-- Worked on fixing bugs and including more features in battleTroll()
+
+Weekend of January 12, 2020
+
+	Sowjanya
+		- Wrote a preliminary text file with instructions on how to play the game.
+		- Wrote function openInstructions(), which allows user to open a text file with the game instructions before they start the game.
+		- Wrote code for forest.c and desert.c, which included the functions that prompts user to move forward in the game in their specified setting.
+	Aditi
+		- wrote the battleMonsters() function that allows the player to engage, attack, and defeat/be defeated by monsters
+		- wrote a function that gives player experience for defeating monster and gives an option of converting newly earned experience into extra health points
 
 
-January 12, 2020
+January 13, 2020
 
-Sowjanya
+	Aditi
+		- debugged many small errors with gameplay to make the program work a lot more smoothly
+		- starting working on how to open a new terminal window when the player enters a battle
 
-- Wrote a preliminary text file with instructions on how to play the game.
-- Wrote function openInstructions(), which allows user to open a text file with the game instructions before they start the game.
-- Wrote code for forest.c and desert.c, which included the functions that prompts user to move forward in the game in their specified setting.
+
+January 14, 2020
+	
+	Aditi
+		- fixed probabilities and monster/player stats to make the gameplay not too easy/difficult
+		- continued working on figuring out how to use named pipes to facilitate opening a new process when the player enters battles
