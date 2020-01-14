@@ -219,8 +219,8 @@ struct monster* createSasquatch(){
 struct monster* createDementor(){
     struct monster *dementor = malloc(sizeof(struct monster));
     dementor->type = "dementor";
-    dementor->health = 5;
-    dementor->damage = 15;
+    dementor->health = 13;
+    dementor->damage = 13;
     dementor->level = 1;
     dementor->status = 1;
     return dementor;
@@ -231,8 +231,8 @@ struct monster* createDementor(){
 struct monster* createCerberus(){
     struct monster *cerberus = malloc(sizeof(struct monster));
     cerberus->type = "cerberus";
-    cerberus->health = 35;
-    cerberus->damage = 25;
+    cerberus->health = 30;
+    cerberus->damage = 15;
     cerberus->level = 2;
     cerberus->status = 1;
     return cerberus;
@@ -241,8 +241,8 @@ struct monster* createCerberus(){
 struct monster* createChimera(){
     struct monster *chimera = malloc(sizeof(struct monster));
     chimera->type = "chimera";
-    chimera->health = 30;
-    chimera->damage = 30;
+    chimera->health = 25;
+    chimera->damage = 20;
     chimera->level = 2;
     chimera->status = 1;
     return chimera;

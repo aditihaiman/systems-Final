@@ -45,7 +45,7 @@ int forest(struct player *PLAYER){
     if (strcmp(input,"path\n")==0) goto path;
 
     clearing:
-        random = rand() % 3;
+        random = rand() % 4;
         //forking paths
         if (random == 0){
             printf("\nThe clearing leads to a cave and muddy path. Where would you like to go [cave/ path]: ");
@@ -64,14 +64,14 @@ int forest(struct player *PLAYER){
             goto clearing;
         }
         //battles monster
-        if (random == 2){
+        else{
             struct monster *MONSTER = randomMonster(PLAYER->level);
             x = battleMonster(MONSTER, PLAYER);
             if (x==1) return 1;
             goto clearing;
         }
     cave:
-        random = rand() % 3;
+        random = rand() % 4;
         //forking paths
         if (random == 0){
             printf("\nThe cave leads to a muddy path and a lake. Where would you like to go? [path/ lake]: ");
@@ -90,14 +90,14 @@ int forest(struct player *PLAYER){
             goto cave;
         }
         //battles monster
-        if (random == 2){
+        else{
           struct monster *MONSTER = randomMonster(PLAYER->level);
           x = battleMonster(MONSTER, PLAYER);
           if (x==1) return 1;
           goto cave;
         }
     path:
-        random = rand() % 3;
+        random = rand() % 4;
         //forking paths
         if (random == 0){
             printf("\nThe path leads to a lake and a clearing. Where would you like to go? [lake/ clearing]: ");
@@ -117,7 +117,7 @@ int forest(struct player *PLAYER){
             goto path;
         }
         //battles monster
-        if (random == 2){
+        else{
           struct monster *MONSTER = randomMonster(PLAYER->level);
           x = battleMonster(MONSTER, PLAYER);
           if (x==1) return 1;
@@ -125,7 +125,7 @@ int forest(struct player *PLAYER){
           //if level up go to level up otherwise go back to path
         }
     lake:
-        random = rand() % 3;
+        random = rand() % 4;
         //forking paths
         if (random == 0){
             printf("\nThe lake leads to a clearing and another cave. Where would you like to go? [clearing/ cave]: ");
@@ -144,7 +144,7 @@ int forest(struct player *PLAYER){
             goto lake;
         }
         //battles monster
-        if (random == 2){
+        else{
           struct monster *MONSTER = randomMonster(PLAYER->level);
           x = battleMonster(MONSTER, PLAYER);
           if (x==1) return 1;
