@@ -23,6 +23,22 @@ struct monster* randomMonster(int level){
     return MONSTERS[random];
 }
 
+void levelUp(struct player* PLAYER){
+  if (PLAYER->level < 3){
+      PLAYER->level += 1;
+      PLAYER->baseHealth += 10;
+      PLAYER->health = PLAYER->baseHealth;
+      PLAYER->damage += 10;
+      PLAYER->experience = 0;
+      printf("Congratulations %s! You have leveled up to level %d. Your base health is now %d and you are now capable of doing %d damage.\n", PLAYER->name, PLAYER->level, PLAYER->health, PLAYER->damage);
+  }
+  if (PLAYER->level == 3){
+      printf("You have reached the last level of the game. You are now ready to go back to your village to deafeat the last few monsters. Whenever you're ready, type [go] to start level four and fulfill your purpose. [go]: ");
+      //village();
+  }
+
+}
+
 int battleTroll(struct monster* monster, struct player* player){ //returns 0 if player wins, 1 if player loses
     char input[100];
     printf("\n%s ", monster->initialmessage);
@@ -52,6 +68,7 @@ int battleTroll(struct monster* monster, struct player* player){ //returns 0 if 
         }
         printf("You have answered all of the riddles correctly! The troll will let you pass. You have gained %d points in experience!\n\n", monster->damage);
         player->experience += monster->damage;
+        if (player->experience >= ((player->level+1)*10)) levelUp(player);
         //printf("%s\n", monster->victorymessage);
         return 0;
     }
@@ -99,19 +116,22 @@ int battleMonster(struct monster* monster, struct player* player){ //returns 0 i
         if (monster->health <= 0){
             printf("Congratulations! You have defeated the %s. You have gained %d points in experience!\n\n", monster->type, monster->damage);
             player->experience += monster->damage * 2;
-            int XP_to_health = player->baseHealth - player->health;
-            if (XP_to_health > player->experience) XP_to_health = player->experience;
-            printf("Your health is at %d, but it could be at %d. Would you like to expend some of the experience you earned to regain some health? Enter a number from 0 to %d: ", player->health, player->baseHealth, XP_to_health);
-            fgets(input, 3, stdin);
-            while(atoi(input) > XP_to_health || input[0]=='-'){
-                printf("Please enter a number between 0 and %d: ", XP_to_health);
-                fgetc(stdin);
+            if (player->experience >= ((player->level+1)*10)) levelUp(player);
+            else{
+                int XP_to_health = player->baseHealth - player->health;
+                if (XP_to_health > player->experience) XP_to_health = player->experience;
+                printf("Your health is at %d, but it could be at %d. Would you like to expend some of the experience you earned to regain some health? Enter a number from 0 to %d: ", player->health, player->baseHealth, XP_to_health);
                 fgets(input, 3, stdin);
-            }
-            player->experience -= atoi(input);
-            player->health += atoi(input);
-            printf("Your health is now at %d and your experience is at %d.\n\n", player->health, player->experience);
-            return 0;
+                while(atoi(input) > XP_to_health || input[0]=='-'){
+                    printf("Please enter a number between 0 and %d: ", XP_to_health);
+                    fgetc(stdin);
+                    fgets(input, 3, stdin);
+                }
+                player->experience -= atoi(input);
+                player->health += atoi(input);
+                printf("Your health is now at %d and your experience is at %d.\n\n", player->health, player->experience);
+                return 0;
+              }
         }
         if (player->health <= 0){
             printf("You have been defeated by the %s. Better luck next time.\n", monster->type);
