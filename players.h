@@ -8,6 +8,8 @@
 #include <time.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#define READ 0
+#define WRITE 1
 
 struct player {
     char *name;
@@ -52,5 +54,5 @@ int village(struct player *player);
 int battleMonster(struct monster*, struct player*);
 struct monster* randomMonster(int level);
 
-int pipeForBattle(struct monster*, struct player*);
+int pipeForBattle(char *, struct player*);
 int closePipeBattle(struct player* );

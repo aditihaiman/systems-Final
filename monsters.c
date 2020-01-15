@@ -1,30 +1,30 @@
 #include "players.h"
 
-int pipeForBattle(struct monster* monster, struct player* player){
+int pipeForBattle(char* status, struct player* player){
     int fd;
-
-    char * myfifo = "/tmp/myfifo2";
-
+    
+    char * myfifo = "/tmp/myfifo";
+   
     mkfifo(myfifo, 0666);
-
-    char monsterType[100], playerName[100], pBHealth[1], pHealth[1], pDamage[1], pExp[1], pLev[1];
-    strcpy(monsterType, monster->type);
+    
+    char playerName[100], pBHealth[3], pHealth[3], pDamage[3], pExp[3], pLev[3];
     strcpy(playerName, player->name);
     sprintf(pBHealth, "%d", player->baseHealth);
     sprintf(pHealth, "%d", player->health);
     sprintf(pDamage, "%d", player->damage);
     sprintf(pExp, "%d", player->experience);
     sprintf(pLev, "%d", player->level);
-
+    
     fd = open(myfifo, O_WRONLY);
-    write(fd, monsterType, sizeof(monsterType));
     write(fd, playerName, sizeof(playerName));
     write(fd, pBHealth, sizeof(pBHealth));
     write(fd, pHealth, sizeof(pHealth));
     write(fd, pDamage, sizeof(pDamage));
     write(fd, pExp, sizeof(pExp));
     write(fd, pLev, sizeof(pLev));
+    write(fd, status, sizeof(status));
 
+    
     close(fd);
     unlink(myfifo);
     return 0;
@@ -103,6 +103,7 @@ int levelUp(struct player* PLAYER){
 }
 
 int battleTroll(struct monster* monster, struct player* player){ //returns 0 if player wins, 1 if player loses
+    pipeForBattle("w", player);
     char input[100];
     printf("\n%s ", monster->initialmessage);
     //fgetc(stdin);
@@ -122,10 +123,12 @@ int battleTroll(struct monster* monster, struct player* player){ //returns 0 if 
                 player->health = player->health - damage;
                 damage += monster->damage;
                 printf("You answered wrong. The troll did %d damage to you. Your health is now %d.\n", damage, player->health);
+
             }
             x++;
             if (player->health <= 0) {
                 printf("%s\n", monster->defeatmessage);
+                pipeForBattle("l", player);
                 return 1;
             }
         }
@@ -133,6 +136,7 @@ int battleTroll(struct monster* monster, struct player* player){ //returns 0 if 
         player->experience += monster->damage;
         if (player->experience >= ((player->level+1)*10)+10) levelUp(player);
         //printf("%s\n", monster->victorymessage);
+        pipeForBattle("w", player);
         return 0;
     }
     if (strcmp(input,"run\n")==0) {
@@ -143,6 +147,7 @@ int battleTroll(struct monster* monster, struct player* player){ //returns 0 if 
 }
 
 int battleMonster(struct monster* monster, struct player* player){ //returns 0 if player wins, 1 if player loses
+    pipeForBattle("w", player);
     char input[100];
     int output = 0;
     //printf("A\n");
@@ -171,6 +176,7 @@ int battleMonster(struct monster* monster, struct player* player){ //returns 0 i
                 int damage = rand() % monster->damage;
                 player->health -= damage;
                 printf("\nThe %s has dealt %d damage to you. You are now at %d health.\n", monster->type, damage, player->health);
+                pipeForBattle("w", player);
             }
             if (turn == 0) turn = 1;
             else turn = 0;
@@ -178,7 +184,10 @@ int battleMonster(struct monster* monster, struct player* player){ //returns 0 i
         if (monster->health <= 0){
             printf("Congratulations! You have defeated the %s. You have gained %d points in experience!\n\n", monster->type, monster->damage*2);
             player->experience += monster->damage * 2;
-            if ((player->experience >= ((player->level+1)*10)+10) && player->level < 3) levelUp(player);
+            pipeForBattle("w", player);
+            if ((player->experience >= ((player->level+1)*10)+10) && player->level < 3){ levelUp(player);
+                pipeForBattle("w", player);
+            }
             if (player->level == 3) return 1;
             else{
                 int XP_to_health = player->baseHealth - player->health;
@@ -193,11 +202,13 @@ int battleMonster(struct monster* monster, struct player* player){ //returns 0 i
                 player->experience -= atoi(input);
                 player->health += atoi(input);
                 printf("Your health is now at %d and your experience is at %d.\n\n", player->health, player->experience);
+                pipeForBattle("w", player);
                 return 0;
               }
         }
         if (player->health <= 0){
             printf("You have been defeated by the %s. Better luck next time.\n", monster->type);
+            pipeForBattle("l", player);
             return 1;
         }
     }
