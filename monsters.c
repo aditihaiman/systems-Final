@@ -69,7 +69,7 @@ int battleTroll(struct monster* monster, struct player* player){ //returns 0 if 
         }
         printf("You have answered all of the riddles correctly! The troll will let you pass. You have gained %d points in experience!\n\n", monster->damage);
         player->experience += monster->damage;
-        if (player->experience >= ((player->level+1)*10)) levelUp(player);
+        if (player->experience >= ((player->level+1)*10)+10) levelUp(player);
         //printf("%s\n", monster->victorymessage);
         return 0;
     }
@@ -91,33 +91,32 @@ int battleMonster(struct monster* monster, struct player* player){ //returns 0 i
 //        battleSiren(monster, player);
 //  }
     else {
-        printf("\nOh no! You have encountered a %s.\n", monster->type);
+        srand(time(NULL));
+        printf("\nOh no! You have encountered a %s. The %s has %d health and is capable of doing %d damage. You must defeat the %s before you can move on!\n", monster->type, monster->type, monster->health, monster->damage, monster->type);
         int turn = 0; //0 means it is players turn
         while (player->health > 0 && monster->health > 0) {
             if (turn == 0){
-                printf("Press \"r\" to roll a dice to determine how much damage you do to the %s. You are capable of doing up to %d damage. ", monster->type, player->damage);
+                printf("\nPress \"r\" to roll a dice to determine how much damage you do to the %s. You are capable of doing up to %d damage. ", monster->type, player->damage);
                 if (output!=0) fgetc(stdin);
                 fgets(input, 3, stdin);
                 if (input[0]=='r'){
-                    srand(time(NULL));
                     int damage = rand() % player->damage;
                     monster->health -= damage;
-                    printf("You have done %d damage. The %s is now at %d health.\n\n", damage, monster->type, monster->health);
+                    printf("\nYou have done %d damage. The %s is now at %d health.\n", damage, monster->type, monster->health);
                 }
             }
             if (turn == 1) {
-                srand(time(NULL));
                 int damage = rand() % monster->damage;
                 player->health -= damage;
-                printf("The %s has dealt %d damage to you. You are now at %d health.\n\n", monster->type, damage, player->health);
+                printf("\nThe %s has dealt %d damage to you. You are now at %d health.\n", monster->type, damage, player->health);
             }
             if (turn == 0) turn = 1;
             else turn = 0;
         }
         if (monster->health <= 0){
-            printf("Congratulations! You have defeated the %s. You have gained %d points in experience!\n\n", monster->type, monster->damage);
+            printf("Congratulations! You have defeated the %s. You have gained %d points in experience!\n\n", monster->type, monster->damage*2);
             player->experience += monster->damage * 2;
-            if (player->experience >= ((player->level+1)*10)) levelUp(player);
+            if (player->experience >= ((player->level+1)*10)+10) levelUp(player);
             else{
                 int XP_to_health = player->baseHealth - player->health;
                 if (XP_to_health > player->experience) XP_to_health = player->experience;
@@ -220,8 +219,8 @@ struct monster* createSasquatch(){
 struct monster* createDementor(){
     struct monster *dementor = malloc(sizeof(struct monster));
     dementor->type = "dementor";
-    dementor->health = 5;
-    dementor->damage = 15;
+    dementor->health = 13;
+    dementor->damage = 13;
     dementor->level = 1;
     dementor->status = 1;
     return dementor;
@@ -232,8 +231,8 @@ struct monster* createDementor(){
 struct monster* createCerberus(){
     struct monster *cerberus = malloc(sizeof(struct monster));
     cerberus->type = "cerberus";
-    cerberus->health = 35;
-    cerberus->damage = 25;
+    cerberus->health = 30;
+    cerberus->damage = 15;
     cerberus->level = 2;
     cerberus->status = 1;
     return cerberus;
@@ -242,8 +241,8 @@ struct monster* createCerberus(){
 struct monster* createChimera(){
     struct monster *chimera = malloc(sizeof(struct monster));
     chimera->type = "chimera";
-    chimera->health = 30;
-    chimera->damage = 30;
+    chimera->health = 25;
+    chimera->damage = 20;
     chimera->level = 2;
     chimera->status = 1;
     return chimera;
@@ -303,7 +302,7 @@ struct monster* createDarthVader(){
 struct monster* createPalpatine(){
     struct monster *palpatine = malloc(sizeof(struct monster));
     palpatine->type = "palpatine";
-    palpatine->health = 75;
+    palpatine->health = 65;
     palpatine->damage = 40;
     palpatine->level = 3;
     palpatine->status = 1;
