@@ -1,5 +1,66 @@
 #include "players.h"
 
+int pipeForBattle(struct monster* monster, struct player* player){
+    int fd;
+    
+    char * myfifo = "/tmp/myfifo2";
+   
+    mkfifo(myfifo, 0666);
+    
+    char monsterType[100], playerName[100], pBHealth[1], pHealth[1], pDamage[1], pExp[1], pLev[1];
+    strcpy(monsterType, monster->type);
+    strcpy(playerName, player->name);
+    sprintf(pBHealth, "%d", player->baseHealth);
+    sprintf(pHealth, "%d", player->health);
+    sprintf(pDamage, "%d", player->damage);
+    sprintf(pExp, "%d", player->experience);
+    sprintf(pLev, "%d", player->level);
+    
+    fd = open(myfifo, O_WRONLY);
+    write(fd, monsterType, sizeof(monsterType));
+    write(fd, playerName, sizeof(playerName));
+    write(fd, pBHealth, sizeof(pBHealth));
+    write(fd, pHealth, sizeof(pHealth));
+    write(fd, pDamage, sizeof(pDamage));
+    write(fd, pExp, sizeof(pExp));
+    write(fd, pLev, sizeof(pLev));
+    
+    close(fd);
+    unlink(myfifo);
+    return 0;
+}
+
+int closePipeBattle(struct player* player){ //returns 0 if player won, 1 if player lost
+    int fd;
+    
+    char * myfifo = "/tmp/myfifo";
+    
+    mkfifo(myfifo, 0666);
+    
+    char status[1], playerName[100], pBHealth[1], pHealth[1], pDamage[1], pExp[1], pLev[1];
+    fd = open(myfifo, O_RDONLY);
+    
+    read(fd, status, sizeof(status));
+    read(fd, playerName, sizeof(playerName));
+    read(fd, pBHealth, sizeof(pBHealth));
+    read(fd, pHealth, sizeof(pHealth));
+    read(fd, pDamage, sizeof(pDamage));
+    read(fd, pExp, sizeof(pExp));
+    read(fd, pLev, sizeof(pLev));
+    
+    close(fd);
+    
+    if(strcmp(status, "1")==0) return 1;
+    else{
+        player->baseHealth = atoi(pBHealth);
+        player->health = atoi(pHealth);
+        player->damage = atoi(pDamage);
+        player->experience = atoi(pExp);
+        player->level = atoi(pLev);
+        return 0;
+    }
+}
+
 struct monster* randomMonster(int level){
     srand(time(NULL));
     struct monster *MONSTERS[16];
@@ -116,7 +177,7 @@ int battleMonster(struct monster* monster, struct player* player){ //returns 0 i
         if (monster->health <= 0){
             printf("Congratulations! You have defeated the %s. You have gained %d points in experience!\n\n", monster->type, monster->damage*2);
             player->experience += monster->damage * 2;
-            if (player->experience >= ((player->level+1)*10)+10) levelUp(player);
+            if ((player->experience >= ((player->level+1)*10)+10) && player->level < 3) levelUp(player);
             else{
                 int XP_to_health = player->baseHealth - player->health;
                 if (XP_to_health > player->experience) XP_to_health = player->experience;

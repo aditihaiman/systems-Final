@@ -32,7 +32,8 @@ int main(){
     read(fd, pExp, sizeof(pExp));
     read(fd, pLev, sizeof(pLev));
     
-    struct player* PLAYER = createPlayer(playerName);
+    struct player* PLAYER = malloc(sizeof(struct player));
+    PLAYER->name = playerName;
     PLAYER->baseHealth = atoi(pBHealth);
     PLAYER->health = atoi(pHealth);
     PLAYER->damage = atoi(pDamage);
@@ -51,7 +52,32 @@ int main(){
 
     close(fd);
     
+    //---------------//
+    
+    int x = battleMonsters(MONSTER, PLAYER);
     
     
+    //----------------//
+    myfifo = "/tmp/myfifo2";
     
+    mkfifo(myfifo, 0666);
+     
+    char status[1];
+    sprintf(pBHealth, "%d", PLAYER->baseHealth);
+    sprintf(pHealth, "%d", PLAYER->health);
+    sprintf(pDamage, "%d", PLAYER->damage);
+    sprintf(pExp, "%d", PLAYER->experience);
+    sprintf(pLev, "%d", PLAYER->level);
+    sprintf(status, "%d", x);
+
+    fd = open(myfifo, O_WRONLY);
+    write(fd, pBHealth, sizeof(pBHealth));
+    write(fd, pHealth, sizeof(pHealth));
+    write(fd, pDamage, sizeof(pDamage));
+    write(fd, pExp, sizeof(pExp));
+    write(fd, pLev, sizeof(pLev));
+    write(fd, status, sizeof(status));
+     
+    close(fd);
+    unlink(myfifo);
 }

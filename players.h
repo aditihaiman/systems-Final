@@ -51,3 +51,6 @@ int village(struct player *player);
 
 int battleMonster(struct monster*, struct player*);
 struct monster* randomMonster(int level);
+
+int pipeForBattle(struct monster*, struct player*);
+int closePipeBattle(struct player* );
