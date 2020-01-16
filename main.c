@@ -40,12 +40,14 @@ void openInstructions(){
 
 
 int main(){
+    system("./battle.sh");
     int fd;
      
     char * myfifo = "/tmp/myfifo";
 
     mkfifo(myfifo, 0666);
     fd = open(myfifo, O_WRONLY);
+
     char input[100];
     printf("Welcome to <game>!\nWould you like to view the instructions? (y/n): ");
     fgets(input, 3, stdin);
