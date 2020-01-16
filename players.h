@@ -47,12 +47,12 @@ struct monster* createMedusa();
 struct monster* createVoldemort();
 struct monster* createDarthVader();
 struct monster* createPalpatine();
-int forest(struct player *PLAYER);
-int desert(struct player *PLAYER);
+int forest(struct player *PLAYER, int);
+int desert(struct player *PLAYER, int);
 int village(struct player *player);
 
-int battleMonster(struct monster*, struct player*);
+int battleMonster(struct monster*, struct player*, int);
 struct monster* randomMonster(int level);
 
-int pipeForBattle(char *, struct player*);
+int pipeForBattle(char *, struct player*, int);
 int closePipeBattle(struct player* );

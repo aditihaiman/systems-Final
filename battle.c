@@ -32,7 +32,7 @@ int main(){
 
     fd = open(myfifo, O_RDONLY);
     
-    while(strcmp(status, "w")==0){
+    while(1){
     
         
         read(fd, playerName, sizeof(playerName));
@@ -44,7 +44,7 @@ int main(){
         read(fd, status, sizeof(status));
         if(strcmp(status,"l")==0) return 0;
         
-        printf("Player: %s\n", playerName);
+        printf("Player Stats: \n");
         printf("\tCurrent Level [%s]\n", pLev);
         printf("\tCurrent Health [%s]\n", pHealth);
         printf("\tMaximum Damage [%s]\n", pDamage);

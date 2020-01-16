@@ -1,6 +1,6 @@
 #include "players.h"
 
-int forest(struct player *PLAYER){
+int forest(struct player *PLAYER, int fd){
     srand(time(NULL));
     int random;
     int x = 0;
@@ -39,7 +39,7 @@ int forest(struct player *PLAYER){
             struct monster *MONSTER = randomMonster(PLAYER->level);
             //pipeForBattle(MONSTER, PLAYER);
             //x = closePipeBattle(PLAYER);
-            x = battleMonster(MONSTER, PLAYER);
+            x = battleMonster(MONSTER, PLAYER, fd);
             if (x==1) return 1;
             goto clearing;
         }
@@ -65,7 +65,7 @@ int forest(struct player *PLAYER){
         //battles monster
         else{
           struct monster *MONSTER = randomMonster(PLAYER->level);
-          x = battleMonster(MONSTER, PLAYER);
+          x = battleMonster(MONSTER, PLAYER, fd);
           if (x==1) return 1;
           goto cave;
         }
@@ -92,7 +92,7 @@ int forest(struct player *PLAYER){
         //battles monster
         else{
           struct monster *MONSTER = randomMonster(PLAYER->level);
-          x = battleMonster(MONSTER, PLAYER);
+          x = battleMonster(MONSTER, PLAYER, fd);
           if (x==1) return 1;
           goto path;
           //if level up go to level up otherwise go back to path
@@ -119,7 +119,7 @@ int forest(struct player *PLAYER){
         //battles monster
         else{
           struct monster *MONSTER = randomMonster(PLAYER->level);
-          x = battleMonster(MONSTER, PLAYER);
+          x = battleMonster(MONSTER, PLAYER, fd);
           if (x==1) return 1;
           goto lake;
         }

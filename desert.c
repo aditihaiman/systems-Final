@@ -1,7 +1,7 @@
 #include "players.h"
 
 
-int desert(struct player *PLAYER){
+int desert(struct player *PLAYER, int fd){
     srand(time(NULL));
     int random;
     int x;
@@ -44,7 +44,7 @@ int desert(struct player *PLAYER){
         //battles monster
         else{
           struct monster *MONSTER = randomMonster(PLAYER->level);
-          x = battleMonster(MONSTER, PLAYER);
+          x = battleMonster(MONSTER, PLAYER, fd);
           if (x==1) return 1;
           goto canyon;
         }
@@ -70,7 +70,7 @@ int desert(struct player *PLAYER){
         //battles monster
         else{
             struct monster *MONSTER = randomMonster(PLAYER->level);
-            x = battleMonster(MONSTER, PLAYER);
+            x = battleMonster(MONSTER, PLAYER, fd);
             if (x==1) return 1;
             goto plateau;
         }
@@ -96,7 +96,7 @@ int desert(struct player *PLAYER){
         //battles monster
         else {
           struct monster *MONSTER = randomMonster(PLAYER->level);
-          x = battleMonster(MONSTER, PLAYER);
+          x = battleMonster(MONSTER, PLAYER, fd);
           if (x==1) return 1;
           goto cave;
         }
@@ -122,7 +122,7 @@ int desert(struct player *PLAYER){
         //battles monster
         else{
           struct monster *MONSTER = randomMonster(PLAYER->level);
-          x = battleMonster(MONSTER, PLAYER);
+          x = battleMonster(MONSTER, PLAYER, fd);
           if (x==1) return 1;
           goto oasis;
 

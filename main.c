@@ -40,6 +40,12 @@ void openInstructions(){
 
 
 int main(){
+    int fd;
+     
+    char * myfifo = "/tmp/myfifo";
+
+    mkfifo(myfifo, 0666);
+    fd = open(myfifo, O_WRONLY);
     char input[100];
     printf("Welcome to <game>!\nWould you like to view the instructions? (y/n): ");
     fgets(input, 3, stdin);
@@ -61,13 +67,16 @@ int main(){
             printf("Invalid choice. Valid choices: [forest/ desert]\n\t");
             fgets(input, 10, stdin);
         }
-        if (strcmp(input,"forest\n")==0) forest(PLAYER);
-        if (strcmp(input,"desert\n")==0) desert(PLAYER);
+        if (strcmp(input,"forest\n")==0) forest(PLAYER, fd);
+        if (strcmp(input,"desert\n")==0) desert(PLAYER, fd);
     }
     if (input[0] == 'n'){
+        close(fd);
         return 0;
     }
-    end: return 0;
+    end:
+        close(fd);
+        return 0;
 }
 
 //system("chmod 755 battle.sh");
