@@ -7,7 +7,8 @@
 #gnome-terminal -e ./program
 
 gcc battle.c
-./a.out
+
+gnome-terminal -e ./a.out
 
 
 
