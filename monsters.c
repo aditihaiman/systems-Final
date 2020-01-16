@@ -2,11 +2,11 @@
 
 int pipeForBattle(char* status, struct player* player, int fd){
 //    int fd;
-//    
+//
 //    char * myfifo = "/tmp/myfifo";
-//   
+//
 //    mkfifo(myfifo, 0666);
-    
+
     char playerName[100], pBHealth[3], pHealth[3], pDamage[3], pExp[3], pLev[3];
     strcpy(playerName, player->name);
     sprintf(pBHealth, "%d", player->baseHealth);
@@ -14,7 +14,7 @@ int pipeForBattle(char* status, struct player* player, int fd){
     sprintf(pDamage, "%d", player->damage);
     sprintf(pExp, "%d", player->experience);
     sprintf(pLev, "%d", player->level);
-    
+
 //    fd = open(myfifo, O_WRONLY);
     write(fd, playerName, sizeof(playerName));
     write(fd, pBHealth, sizeof(pBHealth));
@@ -24,7 +24,7 @@ int pipeForBattle(char* status, struct player* player, int fd){
     write(fd, pLev, sizeof(pLev));
     write(fd, status, sizeof(status));
 
-    
+
     //close(fd);
     //unlink(myfifo);
     return 0;

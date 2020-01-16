@@ -26,8 +26,9 @@ int battleFinalMonsters(struct monster* monster, struct player* player){ //retur
         else turn = 0;
     }
     if (monster->health <= 0){
+        if (strcmp(monster->type,"palpatine")) goto ending;
         printf("Congratulations! You have defeated the %s. Your health is restored to %d!\n\n", monster->type, player->baseHealth);
-        player->health += player->baseHealth;
+        player->health = player->baseHealth;
         //player->health += atoi(input);
         //printf("Your health is now at %d and your experience is at %d.\n\n", player->health, player->experience);
         return 0;
@@ -36,6 +37,7 @@ int battleFinalMonsters(struct monster* monster, struct player* player){ //retur
         printf("You have been defeated by the %s. Alas, after all your hard work, you could not save your village. Be reborn and try again.\n", monster->type);
         return 1;
     }
+    ending: printf("Congratulations! You have defeated all of the monsters and saved your village! You are named the village's defender, and the people love you. Hurrah! Your mission is now over. Take some rest and enjoy your glory, soldier.\n");
     return output;
 }
 
