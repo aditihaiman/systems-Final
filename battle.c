@@ -33,31 +33,29 @@ int main(){
     fd = open(myfifo, O_RDONLY);
     
     while(1){
-    
-        
         read(fd, playerName, sizeof(playerName));
-        read(fd, pBHealth, sizeof(pBHealth));
-        read(fd, pHealth, sizeof(pHealth));
-        read(fd, pDamage, sizeof(pDamage));
-        read(fd, pExp, sizeof(pExp));
-        read(fd, pLev, sizeof(pLev));
-        read(fd, status, sizeof(status));
-        if(strcmp(status,"l")==0) return 0;
-        
-        printf("Player Stats: \n");
-        printf("\tCurrent Level [%s]\n", pLev);
-        printf("\tCurrent Health [%s]\n", pHealth);
-        printf("\tMaximum Damage [%s]\n", pDamage);
-        printf("\tCurrent Experience [%s]\n", pExp);
-        
-        sleep(1);
         system("clear");
+        printf("Player: %s\n", playerName);
+        //read(fd, pBHealth, sizeof(pBHealth));
+        read(fd, pHealth, sizeof(pHealth));
+        printf("\tCurrent Health [%s]\n", pHealth);
+        read(fd, pDamage, sizeof(pDamage));
+        printf("\tMaximum Damage [%s]\n", pDamage);
+        read(fd, pExp, sizeof(pExp));
+        printf("\tCurrent Experience [%s]\n", pExp);
+        read(fd, pLev, sizeof(pLev));
+        printf("\tCurrent Level [%s]\n", pLev);
+        //read(fd, status, sizeof(status));
+        //if(strcmp(status,"l")==0) return 0;
+        
+        
+        //sleep(1);
     }
     
     
     close(fd);
     
-    
+    return 0;
     //int x = battleMonsters(MONSTER, PLAYER);
     
     
