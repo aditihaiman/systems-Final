@@ -40,9 +40,9 @@ void openInstructions(){
 
 
 int main(){
-    system("./battle.sh");
+    //system("./battle.sh");
     int fd;
-     
+
     char * myfifo = "/tmp/myfifo";
 
     mkfifo(myfifo, 0666);

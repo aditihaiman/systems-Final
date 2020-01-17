@@ -22,28 +22,29 @@ int battleFinalMonsters(struct monster* monster, struct player* player, int fd){
             int damage = rand() % monster->damage;
             player->health -= damage;
             printf("\nThe %s has dealt %d damage to you. You are now at %d health.\n", monster->type, damage, player->health);
-	    pipeForBattle("w", player, fd);
+	          pipeForBattle("w", player, fd);
         }
         if (turn == 0) turn = 1;
         else turn = 0;
     }
     if (monster->health <= 0){
-        if (strcmp(monster->type,"palpatine")) goto ending;
+        if (strcmp(monster->type,"palpatine")==0) goto ending;
         printf("Congratulations! You have defeated the %s. Your health is restored to %d!\n\n", monster->type, player->baseHealth);
         player->health = player->baseHealth;
         //player->health += atoi(input);
         //printf("Your health is now at %d and your experience is at %d.\n\n", player->health, player->experience);
-	pipeForBattle("w", player, fd);
+	      pipeForBattle("w", player, fd);
         return 0;
     }
     if (player->health <= 0){
         printf("You have been defeated by the %s. Alas, after all your hard work, you could not save your village. Be reborn and try again.\n", monster->type);
         return 1;
     }
-    ending: printf("Congratulations! You have defeated all of the monsters and saved your village! You are named the village's defender, and the people love you. Hurrah! Your mission is now over. Take some rest and enjoy your glory, soldier.\n");
-    player->health = 0;
-    pipeForBattle("w", player, fd);
-    return output;
+    ending:
+        printf("Congratulations! You have defeated all of the monsters and saved your village! You are named the village's defender, and the people love you. Hurrah! Your mission is now over. Take some rest and enjoy your glory, soldier.\n");
+        player->health = 0;
+        pipeForBattle("w", player, fd);
+        return 1;
 }
 
 
@@ -58,6 +59,7 @@ int village(struct player *player, int fd){
     int x = 0;
     x = battleFinalMonsters(createMedusa(), player, fd);
     if (x == 1) return 1;
+    printf("%d", x);
     x = battleFinalMonsters(createVoldemort(), player, fd);
     if (x == 1) return 1;
     x = battleFinalMonsters(createDarthVader(), player, fd);
