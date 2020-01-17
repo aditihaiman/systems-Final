@@ -105,6 +105,7 @@ int levelUp(struct player* PLAYER, int fd){
 }
 
 int battleTroll(struct monster* monster, struct player* player, int fd){ //returns 0 if player wins, 1 if player loses
+    system("clear");
     pipeForBattle("w", player, fd);
     char input[100];
     printf("\n%s ", monster->initialmessage);
@@ -149,6 +150,7 @@ int battleTroll(struct monster* monster, struct player* player, int fd){ //retur
 }
 
 int battleMonster(struct monster* monster, struct player* player, int fd){ //returns 0 if player wins, 1 if player loses
+    system("clear");
     pipeForBattle("w", player, fd);
     char input[100];
     int output = 0;
@@ -184,7 +186,7 @@ int battleMonster(struct monster* monster, struct player* player, int fd){ //ret
             else turn = 0;
         }
         if (monster->health <= 0){
-            printf("Congratulations! You have defeated the %s. You have gained %d points in experience!\n\n", monster->type, monster->damage*2);
+            printf("Congratulations! You have defeated the %s. You have gained %d points in experience! You may continue in your journey.\n\n", monster->type, monster->damage*2);
             player->experience += monster->damage * 2;
             pipeForBattle("w", player, fd);
             if ((player->experience >= ((player->level+1)*10)+10) && player->level < 3){ levelUp(player, fd);
@@ -226,7 +228,7 @@ struct monster* createTroll(){
     troll->damage = 5;
     troll->level = 0;
     troll->status = 1;
-    troll->initialmessage = "You meet a forest troll who refuses your passage unless you can answer his three riddles. Would you like to answer them or run away? [answer] or [run]";
+    troll->initialmessage = "You meet a troll who refuses your passage unless you can answer his three riddles. Would you like to answer them or run away? [answer] or [run]";
     return troll;
 }
 

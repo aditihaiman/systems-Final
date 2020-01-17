@@ -49,12 +49,14 @@ int main(){
     fd = open(myfifo, O_WRONLY);
 
     char input[100];
+    system("clear");
     printf("Welcome to <game>!\nWould you like to view the instructions? (y/n): ");
     fgets(input, 3, stdin);
     if (input[0] == 'y'){
         openInstructions();
     }
     printf("Would you like to begin? (y/n): ");
+    system("clear");
     fgets(input, 3, stdin);
     if (input[0] == 'y'){
         printf("Type in your character name: ");

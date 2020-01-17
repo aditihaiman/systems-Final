@@ -79,6 +79,7 @@ int desert(struct player *PLAYER, int fd){
         //forking caves
         if (random == 0 || random ==1 ){
             printf("\nThe cave leads to an oasis and a plateau. Where would you like to go? [oasis/ plateau]: ");
+            fgetc(stdin);
             fgets(input, 100, stdin);
             while(strcmp(input,"plateau\n")!=0 && strcmp(input,"oasis\n")!=0){
                 printf("Invalid choice. Valid choices: [plateau/ oasis]\n\t");
