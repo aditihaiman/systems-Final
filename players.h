@@ -49,7 +49,7 @@ struct monster* createDarthVader();
 struct monster* createPalpatine();
 int forest(struct player *PLAYER, int);
 int desert(struct player *PLAYER, int);
-int village(struct player *player);
+int village(struct player *player, int);
 
 int battleMonster(struct monster*, struct player*, int);
 struct monster* randomMonster(int level);

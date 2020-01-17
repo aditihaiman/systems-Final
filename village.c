@@ -1,6 +1,7 @@
 #include "players.h"
 
-int battleFinalMonsters(struct monster* monster, struct player* player){ //returns 0 if player wins, 1 if player loses
+int battleFinalMonsters(struct monster* monster, struct player* player, int fd){ //returns 0 if player wins, 1 if player loses
+    pipeForBattle("w", player, fd);
     char input[100];
     int output = 0;
     srand(time(NULL));
@@ -21,6 +22,7 @@ int battleFinalMonsters(struct monster* monster, struct player* player){ //retur
             int damage = rand() % monster->damage;
             player->health -= damage;
             printf("\nThe %s has dealt %d damage to you. You are now at %d health.\n", monster->type, damage, player->health);
+	    pipeForBattle("w", player, fd);
         }
         if (turn == 0) turn = 1;
         else turn = 0;
@@ -31,6 +33,7 @@ int battleFinalMonsters(struct monster* monster, struct player* player){ //retur
         player->health = player->baseHealth;
         //player->health += atoi(input);
         //printf("Your health is now at %d and your experience is at %d.\n\n", player->health, player->experience);
+	pipeForBattle("w", player, fd);
         return 0;
     }
     if (player->health <= 0){
@@ -38,11 +41,13 @@ int battleFinalMonsters(struct monster* monster, struct player* player){ //retur
         return 1;
     }
     ending: printf("Congratulations! You have defeated all of the monsters and saved your village! You are named the village's defender, and the people love you. Hurrah! Your mission is now over. Take some rest and enjoy your glory, soldier.\n");
+    player->health = 0;
+    pipeForBattle("w", player, fd);
     return output;
 }
 
 
-int village(struct player *player){
+int village(struct player *player, int fd){
     printf("\nWelcome back to the village. Four more monsters await you. They will come at you one by one until you have defeated all of them. Whenever you're ready, type 'go' to beging your mission. ");
     char input[100];
     fgets(input, 10, stdin);
@@ -51,13 +56,13 @@ int village(struct player *player){
         fgets(input, 10, stdin);
     }
     int x = 0;
-    x = battleFinalMonsters(createMedusa(), player);
+    x = battleFinalMonsters(createMedusa(), player, fd);
     if (x == 1) return 1;
-    x = battleFinalMonsters(createVoldemort(), player);
+    x = battleFinalMonsters(createVoldemort(), player, fd);
     if (x == 1) return 1;
-    x = battleFinalMonsters(createDarthVader(), player);
+    x = battleFinalMonsters(createDarthVader(), player, fd);
     if (x == 1) return 1;
-    x = battleFinalMonsters(createPalpatine(), player);
+    x = battleFinalMonsters(createPalpatine(), player, fd);
     if (x == 1) return 1;
     return 0;
 }

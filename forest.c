@@ -16,7 +16,7 @@ int forest(struct player *PLAYER, int fd){
     if (strcmp(input,"path\n")==0) goto path;
 
     clearing:
-        random = 5;//rand() % 6;
+        random = rand() % 6;
         //forking paths
         if (random == 0 || random == 1){
             printf("\nThe clearing leads to a cave and muddy path. Where would you like to go [cave/ path]: ");

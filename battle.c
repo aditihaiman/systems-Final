@@ -38,6 +38,7 @@ int main(){
         printf("Player: %s\n", playerName);
         //read(fd, pBHealth, sizeof(pBHealth));
         read(fd, pHealth, sizeof(pHealth));
+	if(atoi(pHealth)<=0) break;
         printf("\tCurrent Health [%s]\n", pHealth);
         read(fd, pDamage, sizeof(pDamage));
         printf("\tMaximum Damage [%s]\n", pDamage);

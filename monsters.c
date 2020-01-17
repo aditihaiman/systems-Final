@@ -87,7 +87,7 @@ struct monster* randomMonster(int level){
     return MONSTERS[random];
 }
 
-int levelUp(struct player* PLAYER){
+int levelUp(struct player* PLAYER, int fd){
   if (PLAYER->level < 3){
       PLAYER->level += 1;
       PLAYER->baseHealth += 10;
@@ -98,7 +98,7 @@ int levelUp(struct player* PLAYER){
   }
   if (PLAYER->level == 3){
       printf("You have reached the last level of the game. You are now ready to go back to your village to deafeat the last few monsters. You are transported back to the village to fulfill your destiny.\n");
-      village(PLAYER);
+      village(PLAYER, fd);
       return 1;
   }
   return 0;
@@ -136,7 +136,7 @@ int battleTroll(struct monster* monster, struct player* player, int fd){ //retur
         }
         printf("You have answered all of the riddles correctly! The troll will let you pass. You have gained %d points in experience!\n\n", monster->damage);
         player->experience += monster->damage;
-        if (player->experience >= ((player->level+1)*10)+10) levelUp(player);
+        if (player->experience >= ((player->level+1)*10)+10) levelUp(player, fd);
         //printf("%s\n", monster->victorymessage);
         pipeForBattle("w", player, fd);
         return 0;
@@ -187,7 +187,7 @@ int battleMonster(struct monster* monster, struct player* player, int fd){ //ret
             printf("Congratulations! You have defeated the %s. You have gained %d points in experience!\n\n", monster->type, monster->damage*2);
             player->experience += monster->damage * 2;
             pipeForBattle("w", player, fd);
-            if ((player->experience >= ((player->level+1)*10)+10) && player->level < 3){ levelUp(player);
+            if ((player->experience >= ((player->level+1)*10)+10) && player->level < 3){ levelUp(player, fd);
                 pipeForBattle("w", player, fd);
             }
             if (player->level == 3) return 1;
