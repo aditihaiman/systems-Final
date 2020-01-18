@@ -55,10 +55,10 @@ int main(){
     if (input[0] == 'y'){
         openInstructions();
     }
-    printf("Would you like to begin? (y/n): ");
-    system("clear");
+    printf("\n\nWould you like to begin? (y/n): ");
     fgets(input, 3, stdin);
     if (input[0] == 'y'){
+        system("clear");
         printf("Type in your character name: ");
         fgets(input, 100, stdin);
         strtok(input, "\n"); //removes newline
