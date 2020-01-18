@@ -1,66 +1,50 @@
 #include "players.h"
 
 int pipeForBattle(char* status, struct player* player, int fd){
-//    int fd;
-//
-//    char * myfifo = "/tmp/myfifo";
-//
-//    mkfifo(myfifo, 0666);
     
-    char playerName[100], pBHealth[3], pHealth[3], pDamage[3], pExp[3], pLev[3];
+    char playerName[100], pBHealth[3], pHealth[3], pDamage[3], pExp[3], pLev[3], status1[3];
     strcpy(playerName, player->name);
-    sprintf(pBHealth, "%d", player->baseHealth);
+    strcpy(status1, "n");
+    //sprintf(pBHealth, "%d", player->baseHealth);
     sprintf(pHealth, "%d", player->health);
     sprintf(pDamage, "%d", player->damage);
     sprintf(pExp, "%d", player->experience);
     sprintf(pLev, "%d", player->level);
     
-    //printf("h: %s, d: %s, e: %s, l: %s\n", pHealth, pDamage, pExp, pLev);
-    
-//    fd = open(myfifo, O_WRONLY);
     write(fd, playerName, sizeof(playerName));
-    //write(fd, pBHealth, sizeof(pBHealth));
     write(fd, pHealth, sizeof(pHealth));
     write(fd, pDamage, sizeof(pDamage));
     write(fd, pExp, sizeof(pExp));
     write(fd, pLev, sizeof(pLev));
-    //write(fd, status, sizeof(status));
+    //write(fd, status1, sizeof(status1));
 
-    
-    //close(fd);
-    //unlink(myfifo);
     return 0;
 }
 
-int closePipeBattle(struct player* player){ //returns 0 if player won, 1 if player lost
-    int fd;
+int pipeForBattle2(char* status, struct player* player, struct monster* monster, int fd){
 
-    char * myfifo = "/tmp/myfifo";
-
-    mkfifo(myfifo, 0666);
-
-    char status[1], playerName[100], pBHealth[1], pHealth[1], pDamage[1], pExp[1], pLev[1];
-    fd = open(myfifo, O_RDONLY);
-
-    read(fd, status, sizeof(status));
-    read(fd, playerName, sizeof(playerName));
-    read(fd, pBHealth, sizeof(pBHealth));
-    read(fd, pHealth, sizeof(pHealth));
-    read(fd, pDamage, sizeof(pDamage));
-    read(fd, pExp, sizeof(pExp));
-    read(fd, pLev, sizeof(pLev));
-
-    close(fd);
-
-    if(strcmp(status, "1")==0) return 1;
-    else{
-        player->baseHealth = atoi(pBHealth);
-        player->health = atoi(pHealth);
-        player->damage = atoi(pDamage);
-        player->experience = atoi(pExp);
-        player->level = atoi(pLev);
-        return 0;
-    }
+    char playerName[100], pBHealth[3], pHealth[3], pDamage[3], pExp[3], pLev[3], monsterType[100], mHealth[3], mDamage[3];
+    strcpy(playerName, player->name);
+    strcpy(monsterType, monster->type);
+    //sprintf(pBHealth, "%d", player->baseHealth);
+    sprintf(pHealth, "%d", player->health);
+    sprintf(pDamage, "%d", player->damage);
+    sprintf(pExp, "%d", player->experience);
+    sprintf(pLev, "%d", player->level);
+    sprintf(mHealth, "%d", monster->health);
+    sprintf(mDamage, "%d", monster->damage);
+    printf("health: %s\n", pHealth);
+    write(fd, playerName, sizeof(playerName));
+    write(fd, pHealth, sizeof(pHealth));
+    write(fd, pDamage, sizeof(pDamage));
+    write(fd, pExp, sizeof(pExp));
+    write(fd, pLev, sizeof(pLev));
+    write(fd, "b", sizeof("b"));
+    write(fd, monsterType, sizeof(monsterType));
+    write(fd, mHealth, sizeof(mHealth));
+    write(fd, mDamage, sizeof(mDamage));
+    
+    return 0;
 }
 
 struct monster* randomMonster(int level){

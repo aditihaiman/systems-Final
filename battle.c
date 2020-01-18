@@ -29,6 +29,10 @@ int main(){
     char pDamage[3]= "\0";
     char pExp[3]= "\0";
     char pLev[3]= "\0";
+    
+    char monster[100] = "\0";
+    char mHealth[3] = "\0";
+    char mDamage[3] = "\0";
 
     fd = open(myfifo, O_RDONLY);
     
@@ -38,7 +42,7 @@ int main(){
         printf("Player: %s\n", playerName);
         //read(fd, pBHealth, sizeof(pBHealth));
         read(fd, pHealth, sizeof(pHealth));
-	if(atoi(pHealth)<=0) break;
+        if(atoi(pHealth)<=0) break;
         printf("\tCurrent Health [%s]\n", pHealth);
         read(fd, pDamage, sizeof(pDamage));
         printf("\tMaximum Damage [%s]\n", pDamage);
@@ -46,8 +50,16 @@ int main(){
         printf("\tCurrent Experience [%s]\n", pExp);
         read(fd, pLev, sizeof(pLev));
         printf("\tCurrent Level [%s]\n", pLev);
-        //read(fd, status, sizeof(status));
-        //if(strcmp(status,"l")==0) return 0;
+//        read(fd, status, sizeof(status));
+//        printf("b: %s\n", status);
+//        if(strcmp(status, "b")==0){ //b for battle
+//            read(fd, monster, sizeof(monster));
+//            printf("\nMonster: %s\n", monster);
+//            read(fd, mHealth, sizeof(mHealth));
+//            printf("\tCurrent Health [%s]\n", mHealth);
+//            read(fd, mDamage, sizeof(mDamage));
+//            printf("\tMaximum Damage [%s]\n", mDamage);
+//        }
         
         
         //sleep(1);
