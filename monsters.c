@@ -115,17 +115,26 @@ int battleTroll(struct monster* monster, struct player* player, int fd){ //retur
         int x = 1;
         int damage = monster->damage;
         while (x <= 3){
-            printf("\nRiddle #%d: [0] ", x);
-            if (x==1) fgetc(stdin);
+            if(x==1)printf("\nRiddle #%d: What two-digit number equals two times the result of multiplying its digits? ", x);
+            if(x==2)printf("\nRiddle #%d:  ", x);
+            if(x==3)printf("\nRiddle #%d:  ", x);
+            fgetc(stdin);
             fgets(input, 3, stdin);
-            printf("%s\n", input);
-            if (input[0] == '0'){
+            if (x==1 && atoi(input)==36){
+                printf("You answered correctly. The troll is impressed.\n");
+            }
+            else if (x==2 && input[0] == '0'){
+                printf("You answered correctly. The troll is impressed.\n");
+            }
+            else if (x==3 && input[0] == '0'){
                 printf("You answered correctly. The troll is impressed.\n");
             }
             else{
+                if(x==3) damage = player->health;
                 player->health = player->health - damage;
-                damage += monster->damage;
+                pipeForBattle("w", player, fd);
                 printf("You answered wrong. The troll did %d damage to you. Your health is now %d.\n", damage, player->health);
+                damage += monster->damage;
 
             }
             x++;
@@ -187,7 +196,7 @@ int battleMonster(struct monster* monster, struct player* player, int fd){ //ret
         }
         if (monster->health <= 0){
             sleep(1);
-            printf("Congratulations! You have defeated the %s. You have gained %d points in experience! You may continue in your journey.\n\n", monster->type, monster->damage*2);
+            printf("\nCongratulations! You have defeated the %s. You have gained %d points in experience! You may continue in your journey.\n\n", monster->type, monster->damage*2);
             sleep(2);
             player->experience += monster->damage * 2;
             pipeForBattle("w", player, fd);
@@ -231,7 +240,7 @@ struct monster* createTroll(){
     troll->damage = 5;
     troll->level = 0;
     troll->status = 1;
-    troll->initialmessage = "You meet a troll who refuses your passage unless you can answer his three riddles. Would you like to answer them or run away? [answer] or [run]";
+    troll->initialmessage = "You meet a troll who refuses your passage unless you can answer his riddles. Would you like to answer them or run away? [answer] or [run]";
     return troll;
 }
 
