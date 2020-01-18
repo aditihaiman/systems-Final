@@ -50,7 +50,7 @@ int main(){
 
     char input[100];
     system("clear");
-    printf("Welcome to <game>!\nWould you like to view the instructions? (y/n): ");
+    printf("Welcome to Cellars and Serpents!\nWould you like to view the instructions? (y/n): ");
     fgets(input, 3, stdin);
     if (input[0] == 'y'){
         openInstructions();

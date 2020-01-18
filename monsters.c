@@ -186,11 +186,14 @@ int battleMonster(struct monster* monster, struct player* player, int fd){ //ret
             else turn = 0;
         }
         if (monster->health <= 0){
+            sleep(1);
             printf("Congratulations! You have defeated the %s. You have gained %d points in experience! You may continue in your journey.\n\n", monster->type, monster->damage*2);
+            sleep(2);
             player->experience += monster->damage * 2;
             pipeForBattle("w", player, fd);
             if ((player->experience >= ((player->level+1)*10)+10) && player->level < 3){ levelUp(player, fd);
                 pipeForBattle("w", player, fd);
+                sleep(3);
             }
             if (player->level == 3) return 1;
             else if (player->health != player->baseHealth){
