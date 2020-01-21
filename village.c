@@ -31,8 +31,6 @@ int battleFinalMonsters(struct monster* monster, struct player* player, int fd){
         if (strcmp(monster->type,"palpatine")==0) goto ending;
         printf("Congratulations! You have defeated the %s. Your health is restored to %d!\n\n", monster->type, player->baseHealth);
         player->health = player->baseHealth;
-        //player->health += atoi(input);
-        //printf("Your health is now at %d and your experience is at %d.\n\n", player->health, player->experience);
 	      pipeForBattle("w", player, fd);
         return 0;
     }

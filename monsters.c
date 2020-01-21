@@ -149,13 +149,10 @@ int battleMonster(struct monster* monster, struct player* player, int fd){ //ret
     pipeForBattle("w", player, fd);
     char input[100];
     int output = 0;
-    //printf("A\n");
     if (strcmp(monster->type, "troll")==0) {
         output = battleTroll(monster, player, fd);
     }
-//    if (strcmp(monster->type, "siren")==0) {
-//        battleSiren(monster, player);
-//  }
+
     else {
         srand(time(NULL));
         printf("\nOh no! You have encountered a %s. The %s has %d health and is capable of doing %d damage. You must defeat the %s before you can move on!\n", monster->type, monster->type, monster->health, monster->damage, monster->type);

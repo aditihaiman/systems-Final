@@ -20,7 +20,6 @@ void openInstructions(){
         printf("fd: %d\n", fd);
     }
 
-    //fix this so that it returns a string or something i don't know how it works
     char buff[10000];
     memset(buff, 0, 10000);
     int rd = 0;
@@ -36,11 +35,8 @@ void openInstructions(){
 
 }
 
-//reminder: have a file with player stats
-
-
 int main(){
-    //system("./battle.sh");
+    system("./battle.sh");
     int fd;
 
     char * myfifo = "/tmp/myfifo";

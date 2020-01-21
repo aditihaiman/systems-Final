@@ -12,30 +12,30 @@ int main(){
 //    printf("x: %d\n", x);
 
     //battleMonsters();
-    
+
 //    system("chmod 755 battle.sh");
 //    system("./battle.sh");
-    
+
     int fd;
-    
+
     char * myfifo = "/tmp/myfifo";
     mkfifo(myfifo, 0666);
-    
+
     char *status = "w";
-    
+
     char playerName[100] = "\0";
     char pBHealth[3]= "\0";
     char pHealth[3]= "\0";
     char pDamage[3]= "\0";
     char pExp[3]= "\0";
     char pLev[3]= "\0";
-    
+
     char monster[100] = "\0";
     char mHealth[3] = "\0";
     char mDamage[3] = "\0";
 
     fd = open(myfifo, O_RDONLY);
-    
+
     while(1){
         read(fd, playerName, sizeof(playerName));
         system("clear");
@@ -60,18 +60,18 @@ int main(){
 //            read(fd, mDamage, sizeof(mDamage));
 //            printf("\tMaximum Damage [%s]\n", mDamage);
 //        }
-        
-        
+
+
         //sleep(1);
     }
-    
-    
+
+
     close(fd);
-    
+
     return 0;
     //int x = battleMonsters(MONSTER, PLAYER);
-    
-    
+
+
     //----------------//
 //    myfifo = "/tmp/myfifo2";
 //
