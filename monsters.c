@@ -93,7 +93,7 @@ int battleTroll(struct monster* monster, struct player* player, int fd){ //retur
     pipeForBattle("w", player, fd);
     char input[100];
     printf("You meet a troll who refuses your passage unless you can answer his riddles. Would you like to answer them or run away? [answer] or [run] ");
-    //fgetc(stdin);
+    fgetc(stdin);
     fgets(input, 7, stdin);
     if (strcmp(input,"answer")==0) {
         int x = 1;
@@ -103,8 +103,9 @@ int battleTroll(struct monster* monster, struct player* player, int fd){ //retur
             if(x==1)printf("\nRiddle #%d: What two-digit number equals two times the result of multiplying its digits? ", x);
             if(x==2)printf("\nRiddle #%d: What word becomes shorter when you add two more letters to it? ", x);
             if(x==3)printf("\nRiddle #%d: What gets wetter the more it dries? ", x);
-            fgetc(stdin);
+            //fgetc(stdin);
             fgets(input, 100, stdin);
+            printf("%s", input);
             if (x==1 && atoi(input)==36){
                 printf("You answered correctly. The troll is impressed.\n");
             }
@@ -226,7 +227,6 @@ struct monster* createTroll(){
     troll->damage = 5;
     troll->level = 0;
     troll->status = 1;
-    troll->initialmessage = "You meet a troll who refuses your passage unless you can answer his riddles. Would you like to answer them or run away? [answer] or [run]";
     return troll;
 }
 
@@ -387,6 +387,3 @@ struct monster* createPalpatine(){
 
 
 //============================================//
-
-void defeated(struct monster* monster, struct player* player){
-}

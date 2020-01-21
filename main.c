@@ -66,7 +66,7 @@ int main(){
         strcpy(name, input);
         struct player *PLAYER = createPlayer(name);
         pipeForBattle("w", PLAYER, fd);
-        printf("Oh no, %s! your town was destroyed and everyone died. You have to leave your town to defeat the enemies in the surrounding area. Would you like to go through [forest] or [desert]? ", PLAYER->name);
+        printf("Oh no, %s! your village was invaded by powerful monsters that are holding your villagers as hostages. You are not powerful enough to defeat these monsters. It is your mission to train yourself by defeating the monsters in the surrounding area in order to gain the expereince needed to defeat the monsters invading your village. Would you like to go through [forest] or [desert]? ", PLAYER->name);
         fgets(input, 10, stdin);
         while(strcmp(input,"forest\n")!=0 && strcmp(input,"desert\n")!=0){
             printf("Invalid choice. Valid choices: [forest/ desert]\n\t");

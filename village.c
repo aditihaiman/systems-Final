@@ -43,6 +43,7 @@ int battleFinalMonsters(struct monster* monster, struct player* player, int fd){
         return 1;
     }
     ending:
+        system("clear");
         printf("Congratulations! You have defeated all of the monsters and saved your village! You are named the village's defender, and the people love you. Hurrah! Your mission is now over. Take some rest and enjoy your glory, soldier.\n");
         player->health = 0;
         pipeForBattle("w", player, fd);

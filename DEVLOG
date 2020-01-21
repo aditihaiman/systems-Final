@@ -1,73 +1,104 @@
-January 
-
 January 5-6, 2020
 
 	Aditi
-		- starting working on the initial question/answer layout of the game
-		- started working on basic storyline
+	- starting working on the initial question/answer layout of the game
+	- started working on basic storyline
 
 January 8, 2020
 
 	Aditi
-		- fixed an issue with fgets where it didn't wait for user input
+	- fixed an issue with fgets where it didn't wait for user input
 
 January 9, 2020
 
 	Sowjanya
-		- Wrote initial code for battleMonsters() and battleTroll().
+	- Wrote initial code for battleMonsters() and battleTroll(), including the initial message for troll once player encounters it
+
 	Aditi
-		- created monsters.c file and players.h header file with code to create every type of monster that is in the game with all the correct statistics
+	- created monsters.c file and players.h header file with code to create every type of monster that is in the game with all the correct statistics
 
 
 January 10, 2020
 
 	Sowjanya
-		- Worked on fixing bugs and including more features in battleTroll()
+	- Worked on fixing bugs and including more features in battleTroll()
+	
 	Aditi
-		- created function to generate a random monster for the player to encounter
+	- created function to generate a random monster for the player to encounter
 
 
 Weekend of January 12, 2020
 
 	Sowjanya
-		- Wrote a preliminary text file with instructions on how to play the game.
-		- Wrote function openInstructions(), which allows user to open a text file with the game instructions before they start the game.
-		- Wrote code for forest.c and desert.c, which included the functions that prompts user to move forward in the game in their specified setting.
+	- Wrote a preliminary text file with instructions on how to play the game.
+	- Wrote function openInstructions(), which allows user to open a text file with the game instructions before they start the game.
+	- Wrote code for forest.c and desert.c, which included the functions that prompts user to move forward in the game within their specified setting.
+	
 	Aditi
-		- wrote the battleMonsters() function that allows the player to engage, attack, and defeat/be defeated by monsters
-		- wrote a function that gives player experience for defeating monster and gives an option of converting newly earned experience into extra health points
+	- wrote the battleMonsters() function that allows the player to engage, attack, and defeat/be defeated by monsters
+	- wrote a function that gives player experience for defeating monster and gives an option of converting newly earned experience into extra health points
 
 
 January 13, 2020
 
+	Sowjanya
+	- fixed bugs with reading inputs from player
+	- debugged other small errors in order to make game run more smoothly
+	- added new lines in order to make the output onto terminal window look cleaner and easier to read
+
 	Aditi
-		- debugged many small errors with gameplay to make the program work a lot more smoothly
-		- starting working on how to open a new terminal window when the player enters a battle
+	- debugged many small errors with gameplay to make the program work a lot more smoothly
+	- starting working on how to open a new terminal window when the player enters a battle
 
 
 January 14, 2020
-	
+
+	Sowjanya
+	- wrote function levelUp() which makes player level up once enough experience is gained
+	- fixed bug with fgets() and player's name so that the game addresses player by their input name rather than by 'forest' or 'desert'
+	- add code that notifies when player's input is invalid and prompts them to try again with the correct choices	
+	- wrote code for village.c, including when to go to village(), the order of the monsters the player encounters, the messages that the player must read before entering, the changes in the player's stats, etc.
+	- debugged errors regarding the code that notifies players of their invalid inputs
+
 	Aditi
-		- fixed probabilities and monster/player stats to make the gameplay not too easy/difficult
-		- continued working on figuring out how to use named pipes to facilitate opening a new process when the player enters battles
+	- fixed probabilities and monster/player stats to make the gameplay not too easy/difficult
+	- continued working on figuring out how to use named pipes to facilitate opening a new process when the player enters battles
 
 January 15, 2020
 
+	Sowjanya
+	- wrote code for battleFinalMonsters(), which deals with the last four monsters that the player encounters
+	- debugged some errors within village.c
+	
 	Aditi
-		- working on trying to figure out how to implement piping in a separate terminal window
+	- working on trying to figure out how to implement piping in a separate terminal window
 
 January 16, 2020
 
+	Sowjanya
+	- debugged small errors
+	- updated winning/defeated messages
+
 	Aditi
-		- figured out how to open a new window (only works in linux though)
-		- implemented piping between the two processes running in two windows
+	- figured out how to open a new window (only works in linux though)
+	- implemented piping between the two processes running in two windows
 		
 Weekend January 17-19, 2020
 
+	Sowjanya
+	- fixed bugs in village.c where ending statements were being read before they should be
+	- debugged other small errors
+
 	Aditi
-		- worked on some final debugging and touch ups (troll riddles and some visual layout stuff)
+	- worked on some final debugging and touch ups (troll riddles and some visual layout stuff)
 
 January 20, 2020
 
+	Sowjanya
+	- final edits; final tests
+	- added two more riddles to troll
+	- cleaned up the output of terminal so terminal isn't cluttered and everything is easier to read
+	- updated README in order to have information regarding the technical design, project description, and instructions of the game
+
 	Aditi
-		- final edits, worked on readme and project description
+	- final edits, worked on readme and project description
