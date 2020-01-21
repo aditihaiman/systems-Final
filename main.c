@@ -65,6 +65,7 @@ int main(){
         char name[100];
         strcpy(name, input);
         struct player *PLAYER = createPlayer(name);
+        pipeForBattle("w", PLAYER, fd);
         printf("Oh no, %s! your town was destroyed and everyone died. You have to leave your town to defeat the enemies in the surrounding area. Would you like to go through [forest] or [desert]? ", PLAYER->name);
         fgets(input, 10, stdin);
         while(strcmp(input,"forest\n")!=0 && strcmp(input,"desert\n")!=0){

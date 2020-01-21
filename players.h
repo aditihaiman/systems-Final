@@ -52,6 +52,7 @@ int desert(struct player *PLAYER, int);
 int village(struct player *player, int);
 
 int battleMonster(struct monster*, struct player*, int);
+int battleTroll(struct monster*, struct player*, int);
 struct monster* randomMonster(int level);
 
 int pipeForBattle(char *, struct player*, int);
