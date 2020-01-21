@@ -37,6 +37,8 @@ int battleFinalMonsters(struct monster* monster, struct player* player, int fd){
         return 0;
     }
     if (player->health <= 0){
+        sleep(2);
+        system("clear");
         printf("You have been defeated by the %s. Alas, after all your hard work, you could not save your village. Be reborn and try again.\n", monster->type);
         return 1;
     }
@@ -49,7 +51,8 @@ int battleFinalMonsters(struct monster* monster, struct player* player, int fd){
 
 
 int village(struct player *player, int fd){
-    printf("\nWelcome back to the village. Four more monsters await you. They will come at you one by one until you have defeated all of them. Whenever you're ready, type 'go' to beging your mission. ");
+    printf("\nWelcome back to the village. Four more monsters await you. They will come at you one by one until you have defeated all of them. Whenever you're ready, type 'go' to begin your mission. ");
+    system("clear");
     char input[100];
     fgets(input, 10, stdin);
     while(strcmp(input,"go\n")!=0){
@@ -59,11 +62,13 @@ int village(struct player *player, int fd){
     int x = 0;
     x = battleFinalMonsters(createMedusa(), player, fd);
     if (x == 1) return 1;
-    printf("%d", x);
+    system("clear");
     x = battleFinalMonsters(createVoldemort(), player, fd);
     if (x == 1) return 1;
+    system("clear");
     x = battleFinalMonsters(createDarthVader(), player, fd);
     if (x == 1) return 1;
+    system("clear");
     x = battleFinalMonsters(createPalpatine(), player, fd);
     if (x == 1) return 1;
     return 0;

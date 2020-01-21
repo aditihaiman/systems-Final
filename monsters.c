@@ -1,7 +1,7 @@
 #include "players.h"
 
 int pipeForBattle(char* status, struct player* player, int fd){
-    
+
     char playerName[100], pBHealth[3], pHealth[3], pDamage[3], pExp[3], pLev[3], status1[3];
     strcpy(playerName, player->name);
     strcpy(status1, "n");
@@ -10,7 +10,7 @@ int pipeForBattle(char* status, struct player* player, int fd){
     sprintf(pDamage, "%d", player->damage);
     sprintf(pExp, "%d", player->experience);
     sprintf(pLev, "%d", player->level);
-    
+
     write(fd, playerName, sizeof(playerName));
     write(fd, pHealth, sizeof(pHealth));
     write(fd, pDamage, sizeof(pDamage));
@@ -43,7 +43,7 @@ int pipeForBattle2(char* status, struct player* player, struct monster* monster,
     write(fd, monsterType, sizeof(monsterType));
     write(fd, mHealth, sizeof(mHealth));
     write(fd, mDamage, sizeof(mDamage));
-    
+
     return 0;
 }
 
@@ -78,10 +78,10 @@ int levelUp(struct player* PLAYER, int fd){
       PLAYER->health = PLAYER->baseHealth;
       PLAYER->damage += 10;
       PLAYER->experience = 0;
-      printf("Congratulations %s! You have leveled up to level %d. Your base health is now %d and you are now capable of doing %d damage.\n", PLAYER->name, PLAYER->level, PLAYER->health, PLAYER->damage);
+      printf("\nCongratulations %s! You have leveled up to level %d. Your base health is now %d and you are now capable of doing %d damage.\n", PLAYER->name, PLAYER->level, PLAYER->health, PLAYER->damage);
   }
   if (PLAYER->level == 3){
-      printf("You have reached the last level of the game. You are now ready to go back to your village to deafeat the last few monsters. You are transported back to the village to fulfill your destiny.\n");
+      printf("\nYou have reached the last level of the game. You are now ready to go back to your village to deafeat the last few monsters. You are transported back to the village to fulfill your destiny.\n");
       village(PLAYER, fd);
       return 1;
   }
@@ -98,19 +98,20 @@ int battleTroll(struct monster* monster, struct player* player, int fd){ //retur
     if (strcmp(input,"answer")==0) {
         int x = 1;
         int damage = monster->damage;
+        printf("Instructions: The troll will ask you three questions. You must pass at least two of them to pass. Answer only in lowercase letters.\n\n");
         while (x <= 3){
             if(x==1)printf("\nRiddle #%d: What two-digit number equals two times the result of multiplying its digits? ", x);
-            if(x==2)printf("\nRiddle #%d:  ", x);
-            if(x==3)printf("\nRiddle #%d:  ", x);
+            if(x==2)printf("\nRiddle #%d: What word becomes shorter when you add two more letters to it?", x);
+            if(x==3)printf("\nRiddle #%d: What gets wetter the more it dries?", x);
             fgetc(stdin);
-            fgets(input, 3, stdin);
+            fgets(input, 100, stdin);
             if (x==1 && atoi(input)==36){
                 printf("You answered correctly. The troll is impressed.\n");
             }
-            else if (x==2 && input[0] == '0'){
+            else if (x==2 && strcmp(input,"shorter")==0){
                 printf("You answered correctly. The troll is impressed.\n");
             }
-            else if (x==3 && input[0] == '0'){
+            else if (x==3 && (strcmp(input,"a towel")==0 || strcmp(input,"towel")==0)){
                 printf("You answered correctly. The troll is impressed.\n");
             }
             else{
@@ -180,6 +181,7 @@ int battleMonster(struct monster* monster, struct player* player, int fd){ //ret
         }
         if (monster->health <= 0){
             sleep(1);
+            system("clear");
             printf("\nCongratulations! You have defeated the %s. You have gained %d points in experience! You may continue in your journey.\n\n", monster->type, monster->damage*2);
             sleep(2);
             player->experience += monster->damage * 2;
@@ -207,7 +209,7 @@ int battleMonster(struct monster* monster, struct player* player, int fd){ //ret
               }
         }
         if (player->health <= 0){
-            printf("You have been defeated by the %s. Better luck next time.\n", monster->type);
+            printf("\nYou have been defeated by the %s. Better luck next time.\n", monster->type);
             pipeForBattle("l", player, fd);
             return 1;
         }
