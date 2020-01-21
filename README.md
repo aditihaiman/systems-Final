@@ -25,6 +25,6 @@ Instructions:
   - Once you have reached the last level of the game, you may return to your starting point to battle the last four monsters that will be waiting for you.
 
 Other Information/Known Bugs:
-  - When asking for an input, sometimes the fgets() function fails to work and entirely skips over waiting for the user to enter an input. Instead it goes directly to the next part of the program.
+  - When asking for an input, sometimes the fgets() function fails to work and entirely skips over waiting for the user to enter an input. Instead it goes directly to the next part of the program. This only happens sometimes, and usually only when the player encounters a troll.
   - Sometimes, the input provided by the user is changed by replacing the first character with a space (we think this is somehow an issue with fgets() as well). This impacts the ability of the program to continue because the input doesn't match what would advance the game.
   - We recommend not using Control C to exit the program because the separate process running in the window (that displays player stats) will enter an infinite loop. Instead, first exit the other process before exiting the main process.
