@@ -50,3 +50,20 @@ January 14, 2020
 	Aditi
 		- fixed probabilities and monster/player stats to make the gameplay not too easy/difficult
 		- continued working on figuring out how to use named pipes to facilitate opening a new process when the player enters battles
+
+January 15, 2020
+
+	Aditi
+		- working on trying to figure out how to implement piping in a separate terminal window
+
+January 16, 2020
+
+	Aditi
+		- figured out how to open a new window (only works in linux though)
+		- implemented piping between the two processes running in two windows
+		
+Weekend January 17-19, 2020
+
+	Aditi
+		- worked on some final debugging and touch ups (troll riddles and some visual layout stuff)
+	
