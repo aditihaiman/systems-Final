@@ -26,6 +26,9 @@ struct monster {
     int damage; //damage dealt to player, also amount of experience gained when defeated
     int level;
     int status; //0 for defeated, 1 for undefeated
+    char *initialmessage; //message given when the monster is first encountered
+    char *defeatmessage; //message given when the player is defeated
+    char *victorymessage;//message given when the player wins
 };
 
 struct monster* createTroll();
